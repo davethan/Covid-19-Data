@@ -5,6 +5,8 @@ import Loading from "../Loading";
 import GlobalFigures from "../GlobalFigures/GlobalFigures";
 import CountriesSummary from "../CountriesSummary/CountriesSummary";
 import Typography from "@material-ui/core/Typography";
+import { Route, Link } from "react-router-dom";
+import CountryChart from "../CountryChart/CountryChart";
 
 function timeSinceLastUpdate(date) {
   let time = date + "";
@@ -43,14 +45,14 @@ class Summary extends React.Component {
   }
 
   async componentDidMount() {
-    console.log("invoqued");
-    /*
-     let url = 'https://api.covid19api.com/summary';
-    const response = await fetch(url);
-    const data = await response.json(); */
-    
-    //if maximum requests reached :
+    // console.log("invoked");
 
+    let url = "https://api.covid19api.com/summary";
+    const response = await fetch(url);
+    const data = await response.json();
+
+    //if maximum requests reached :
+    /*
     let data = {
       Global: {
         NewConfirmed: 100282,
@@ -87,10 +89,9 @@ class Summary extends React.Component {
         },
       ],
       Date: "2020-04-05T06:37:00Z",
-    };
+    };*/
     for (let i = 0; i < data.Countries.length; i++) {
       delete data.Countries[i]["CountryCode"];
-      delete data.Countries[i]["Slug"];
       delete data.Countries[i]["Date"];
     }
     this.setState({ data });
@@ -112,8 +113,27 @@ class Summary extends React.Component {
         <div className={classes.lastUpdate}>
           <Typography>last update: {time} </Typography>
         </div>
-        <GlobalFigures Globals={state.data.Global} />
-        <CountriesSummary CountriesSummary={state.data.Countries} />
+
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <div>
+              <GlobalFigures Globals={state.data.Global} />
+              <CountriesSummary CountriesSummary={state.data.Countries} />
+            </div>
+          )}
+        />
+
+        <Route
+          exact
+          path="/country:countryName"
+          render={(params) => (
+            <div>
+              <CountryChart props={params} />
+            </div>
+          )}
+        />
       </div>
     );
   }

@@ -8,12 +8,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import { Link } from "react-router-dom";
 
 function createData(name, code, population, size) {
   const density = population / size;
   return { name, code, population, size, density };
 }
-
 
 const useStyles = makeStyles({
   root: {
@@ -25,7 +25,6 @@ const useStyles = makeStyles({
 });
 
 export default function CountriesSummary(props) {
-  console.log(props);
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -60,13 +59,23 @@ export default function CountriesSummary(props) {
             ).map((countries, index1) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={index1}>
-                  {Object.keys(props.CountriesSummary[page * rowsPerPage + index1]).map(function (
-                    key,
-                    index2
-                  ) {
+                  {Object.keys(
+                    props.CountriesSummary[page * rowsPerPage + index1]
+                  ).map(function (key, index2) {
                     return (
                       <TableCell key={index2}>
-                        {props.CountriesSummary[page * rowsPerPage + index1][key]}
+                        <Link
+                          to={`/country:${
+                            props.CountriesSummary[page * rowsPerPage + index1]
+                              .Slug
+                          }`}
+                        >
+                          {
+                            props.CountriesSummary[page * rowsPerPage + index1][
+                              key
+                            ]
+                          }
+                        </Link>
                       </TableCell>
                     );
                   })}
