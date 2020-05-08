@@ -1,42 +1,38 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
+import Typography from '@material-ui/core/Typography';
+import useStyles from "./Styles.js";
 
 export default function GlobalFigures(props) {
+  const classes = useStyles();
     const data = props.Globals;
     // console.log(props.Globals)
-  const classes = useStyles();
 
   return (
     <div className={classes.root}>
+      <Divider/>
       <List component="nav" aria-label="main mailbox folders">
-        <ListItem button>
-          <ListItemIcon>
-              Total Cases: 
-          </ListItemIcon>
-          <ListItemText primary={data.TotalConfirmed} />
+        <ListItem button className={classes.listItem}>
+            <Typography className={classes.typography}>
+              <h3>Total Cases Worldwide</h3>
+            </Typography>
+            <Typography className={classes.typography}>
+              <h1>{data.TotalConfirmed}</h1>
+            </Typography>
         </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-              Total Deaths: 
-          </ListItemIcon>
-          <ListItemText primary={data.TotalDeaths} />
+        <ListItem button className={classes.listItem}>
+          <Typography className={classes.typography}>
+            <h3>Total Deaths Worldwide</h3>
+          </Typography>
+          <Typography className={classes.typography}>
+            <h1>{data.TotalDeaths}</h1>
+          </Typography>
         </ListItem>
       </List>
       <Divider/>
+      
     </div>
   );
 }

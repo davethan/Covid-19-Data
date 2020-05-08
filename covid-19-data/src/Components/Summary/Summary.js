@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/styles";
 import Loading from "../Loading";
 import GlobalFigures from "../GlobalFigures/GlobalFigures";
 import CountriesSummary from "../CountriesSummary/CountriesSummary";
+import Typography from "@material-ui/core/Typography";
 
 function timeSinceLastUpdate(date) {
   let time = date + "";
@@ -42,12 +43,14 @@ class Summary extends React.Component {
   }
 
   async componentDidMount() {
+    console.log("invoqued");
+    /*
      let url = 'https://api.covid19api.com/summary';
     const response = await fetch(url);
-    const data = await response.json(); 
-
+    const data = await response.json(); */
+    
     //if maximum requests reached :
-    /*
+
     let data = {
       Global: {
         NewConfirmed: 100282,
@@ -84,7 +87,7 @@ class Summary extends React.Component {
         },
       ],
       Date: "2020-04-05T06:37:00Z",
-    };*/
+    };
     for (let i = 0; i < data.Countries.length; i++) {
       delete data.Countries[i]["CountryCode"];
       delete data.Countries[i]["Slug"];
@@ -101,11 +104,15 @@ class Summary extends React.Component {
       time = timeSinceLastUpdate(state.data.Date);
     }
     return state === null ? (
-      <Loading />
+      <div className={classes.summaryBody}>
+        <Loading />
+      </div>
     ) : (
-      <div className={classes.SummaryBody}>
+      <div className={classes.summaryBody}>
+        <div className={classes.lastUpdate}>
+          <Typography>last update: {time} </Typography>
+        </div>
         <GlobalFigures Globals={state.data.Global} />
-        last update: {time}
         <CountriesSummary CountriesSummary={state.data.Countries} />
       </div>
     );

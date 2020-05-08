@@ -1,10 +1,12 @@
 const styles = () => ({
-    SummaryBody:{
-      display:'flex',
-      flexDirection: 'column',
-      margin:'auto',
-    },
-  });
-  
-  export default styles;
-  
+  summaryBody: {
+    display: "flex",
+    flexDirection: "column",
+    margin: "auto",
+  },
+  lastUpdate: {
+    textAlign: "center",
+  },
+});
+
+export default styles;
