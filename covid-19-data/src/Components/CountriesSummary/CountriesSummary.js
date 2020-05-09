@@ -10,11 +10,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Link } from "react-router-dom";
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
-
 const useStyles = makeStyles({
   root: {
     width: "100%",
