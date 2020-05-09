@@ -1,11 +1,12 @@
-import { makeStyles } from "@material-ui/core/styles";
-const useStyles = makeStyles((theme) => ({
+const styles = () => ({
   countryCDR: {
     width: "70%",
     margin: "auto",
   },
-  chart: {
+  noData: {
+    marginTop: "1rem",
     marginBottom: "1rem",
+    textAlign: "center",
   },
   "@media(max-width: 900px) and (min-width: 601px)": {
     countryCDR: {
@@ -17,6 +18,6 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
     },
   },
-}));
+});
 
-export default useStyles;
+export default styles;

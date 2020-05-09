@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 export default function CountriesSummary(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(90);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -91,7 +91,7 @@ export default function CountriesSummary(props) {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[70, 90, 130]}
         component="div"
         count={props.CountriesSummary.length}
         rowsPerPage={rowsPerPage}

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Styles.js";
 import { withStyles } from "@material-ui/styles";
 import Loading from "../Loading";
-import GlobalFigures from "../GlobalFigures/GlobalFigures";
+import GeneralGlobally from "../GeneralGlobally/GeneralGlobally";
 import CountriesSummary from "../CountriesSummary/CountriesSummary";
 import Typography from "@material-ui/core/Typography";
 import { Route } from "react-router-dom";
@@ -119,7 +119,7 @@ class Summary extends React.Component {
             path="/"
             render={() => (
               <div>
-                <GlobalFigures Globals={state.data.Global} />
+                <GeneralGlobally Globals={state.data.Global} />
                 <CountriesSummary CountriesSummary={state.data.Countries} />
               </div>
             )}
