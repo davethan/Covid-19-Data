@@ -1,16 +1,15 @@
 import { makeStyles } from "@material-ui/core/styles";
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    height: "3rem",
+const useStyles = makeStyles({
+  root: {
+    width: "100%",
   },
-  toolBar: {
-    minHeight: "3rem",
+  container: {
+    maxHeight: 440,
   },
   link: {
     textTransform: "none",
     textDecoration: "none",
-    color: "white",
+    color: "black",
   },
-}));
-
+});
 export default useStyles;

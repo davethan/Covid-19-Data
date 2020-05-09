@@ -46,14 +46,12 @@ class Summary extends React.Component {
   }
 
   async componentDidMount() {
-    // console.log("invoked");
-    /*
     let url = "https://api.covid19api.com/summary";
     const response = await fetch(url);
     const data = await response.json();
-
+    /*
     //if maximum requests reached :
-    */
+    
     let data = {
       Global: {
         NewConfirmed: 100282,
@@ -90,7 +88,7 @@ class Summary extends React.Component {
         },
       ],
       Date: "2020-04-05T06:37:00Z",
-    };
+    };*/
     for (let i = 0; i < data.Countries.length; i++) {
       delete data.Countries[i]["CountryCode"];
       delete data.Countries[i]["Date"];
@@ -107,14 +105,14 @@ class Summary extends React.Component {
     }
     return state === null ? (
       <div>
-        <Header/>
+        <Header />
         <div className={classes.summaryBody}>
           <Loading />
         </div>
       </div>
     ) : (
       <div>
-        <Header/>
+        <Header />
         <div className={classes.summaryBody}>
           <Route
             exact

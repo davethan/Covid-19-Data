@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from "./Styles.js";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,15 +9,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Link } from "react-router-dom";
-
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-  },
-  container: {
-    maxHeight: 440,
-  },
-});
 
 export default function CountriesSummary(props) {
   const classes = useStyles();
@@ -34,7 +25,7 @@ export default function CountriesSummary(props) {
   };
 
   return (
-    <Paper className={classes.root}>
+    <Paper elevation={1} className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -43,7 +34,23 @@ export default function CountriesSummary(props) {
                 key,
                 index
               ) {
-                return <TableCell key={index}>{key}</TableCell>;
+                if (index === 1) {
+                  return <React.Fragment key={index}></React.Fragment>;
+                } else if (index === 2) {
+                  return <TableCell key={index}>New Cases</TableCell>;
+                } else if (index === 3) {
+                  return <TableCell key={index}>Total Cases</TableCell>;
+                } else if (index === 4) {
+                  return <TableCell key={index}>New Deaths</TableCell>;
+                } else if (index === 5) {
+                  return <TableCell key={index}>Total Deaths</TableCell>;
+                } else if (index === 6) {
+                  return <TableCell key={index}>New Recovered</TableCell>;
+                } else if (index === 7) {
+                  return <TableCell key={index}>Total Recovered</TableCell>;
+                } else {
+                  return <TableCell key={index}>{key}</TableCell>;
+                }
               })}
             </TableRow>
           </TableHead>
@@ -57,13 +64,14 @@ export default function CountriesSummary(props) {
                   {Object.keys(
                     props.CountriesSummary[page * rowsPerPage + index1]
                   ).map(function (key, index2) {
-                    return (
+                    return index2 !== 1 ? (
                       <TableCell key={index2}>
                         <Link
                           to={`/country:${
                             props.CountriesSummary[page * rowsPerPage + index1]
                               .Slug
                           }`}
+                          className={classes.link}
                         >
                           {
                             props.CountriesSummary[page * rowsPerPage + index1][
@@ -72,6 +80,8 @@ export default function CountriesSummary(props) {
                           }
                         </Link>
                       </TableCell>
+                    ) : (
+                      <React.Fragment key={index2}></React.Fragment>
                     );
                   })}
                 </TableRow>

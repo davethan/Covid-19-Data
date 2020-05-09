@@ -1,8 +1,8 @@
 import React from "react";
 import useStyles from "./Styles.js";
-import CountryCases from "../CountryCases/CountryCases";
-import CountryDeaths from "../CountryDeaths/CountryDeaths";
-import CountryRecovered from "../CountryRecovered/CountryRecovered";
+import CountryCases from "../Charts/CountryCases";
+import CountryDeaths from "../Charts/CountryDeaths";
+import CountryRecovered from "../Charts/CountryRecovered";
 
 export default function CountryCDR(props) {
   const classes = useStyles();
@@ -10,8 +10,7 @@ export default function CountryCDR(props) {
   slug = slug.slice(9, slug.length);
   return (
     <div className={classes.countryCDR}>
-        
-      <CountryCases  slug={slug} />
+      <CountryCases slug={slug} />
       <CountryDeaths slug={slug} />
       <CountryRecovered slug={slug} />
     </div>

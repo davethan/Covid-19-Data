@@ -9,12 +9,11 @@ const styles = () => ({
     textAlign: "center",
     marginTop: "1rem",
   },
-  '@media(max-width: 600px)':{
+  "@media(max-width: 600px)": {
     summaryBody: {
-      maxWidth: '100%',
+      maxWidth: "100%",
     },
   },
-  
 });
 
 export default styles;

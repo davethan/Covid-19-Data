@@ -1,12 +1,11 @@
-import CanvasJSReact from "../Charts/canvasjs.react";
-import styles from "../Charts/Styles.js";
+import CanvasJSReact from "./canvasjs.react";
+import styles from "./Styles.js";
 import { withStyles } from "@material-ui/styles";
 import Loading from "../Loading";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 var React = require("react");
 var Component = React.Component;
-var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function constructDataPoints(state) {
@@ -20,20 +19,17 @@ function constructDataPoints(state) {
   return dataPoints;
 }
 
-class CountryCases extends Component {
+class CountryDeaths extends Component {
   constructor(props) {
     super(props);
     this.state = null;
-    // this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   async componentDidMount() {
-    // console.log("invoked");
-    /*
-    let url = `https://api.covid19api.com/dayone/country/${this.props.slug}/status/confirmed`;
+    let url = `https://api.covid19api.com/dayone/country/${this.props.slug}/status/deaths`;
     const response = await fetch(url);
     const data = await response.json();
-    */
+    /*
     let data = [
       {
         Country: "Albania",
@@ -71,7 +67,7 @@ class CountryCases extends Component {
         Status: "confirmed",
         Date: "2020-03-11T00:00:00Z",
       },
-    ];
+    ];*/
     let dataWithoutProvinces = [];
     let k = 0;
     for (let i = 0; i < data.length; i++) {
@@ -96,7 +92,11 @@ class CountryCases extends Component {
     if (this.state === null) {
       return <Loading />;
     } else if (this.state.dataWithoutProvinces.length <= 0) {
-      return <Typography>This country doesn't have any cases yet</Typography>;
+      return (
+        <Typography className={classes.noData}>
+          This country doesn't have any deaths.
+        </Typography>
+      );
     } else {
       let dataPoints = null;
       dataPoints = constructDataPoints(this.state);
@@ -118,7 +118,7 @@ class CountryCases extends Component {
           {
             yValueFormatString: "#,###",
             xValueFormatString: "",
-            type: "spline",
+            type: "line",
             dataPoints: dataPoints,
           },
         ],
@@ -126,17 +126,16 @@ class CountryCases extends Component {
       return (
         <Paper elevation={3} className={classes.chart}>
           <Typography variant="h5" className={classes.title}>
-            Total cases in {this.state.dataWithoutProvinces[0].Country}
+            Deaths in {this.state.dataWithoutProvinces[0].Country}
           </Typography>
           <CanvasJSChart
             options={options}
             onRef={(ref) => (this.chart = ref)}
           />
-          {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
         </Paper>
       );
     }
   }
 }
 
-export default withStyles(styles)(CountryCases);
+export default withStyles(styles)(CountryDeaths);
