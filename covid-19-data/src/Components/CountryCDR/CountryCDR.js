@@ -12,23 +12,34 @@ function getSlug(slug) {
 }
 
 function dataEdit(data) {
-  let dataWithoutProvinces = [];
+  let dataWithoutDetails = [];
   let k = 0;
   for (let i = 0; i < data.length; i++) {
     if (data[i].Province === "") {
-      dataWithoutProvinces[k] = data[i];
+      dataWithoutDetails[k] = data[i];
       k++;
     }
   }
-  for (let i = 0; i < dataWithoutProvinces.length; i++) {
-    delete dataWithoutProvinces[i]["CountryCode"];
-    delete dataWithoutProvinces[i]["City"];
-    delete dataWithoutProvinces[i]["CityCode"];
-    delete dataWithoutProvinces[i]["Lat"];
-    delete dataWithoutProvinces[i]["Lon"];
-    delete dataWithoutProvinces[i]["Province"];
+  for (let i = 0; i < dataWithoutDetails.length; i++) {
+    delete dataWithoutDetails[i]["CountryCode"];
+    delete dataWithoutDetails[i]["City"];
+    delete dataWithoutDetails[i]["CityCode"];
+    delete dataWithoutDetails[i]["Lat"];
+    delete dataWithoutDetails[i]["Lon"];
+    delete dataWithoutDetails[i]["Province"];
   }
-  return dataWithoutProvinces;
+  return dataWithoutDetails;
+}
+
+function last2weeks(data){
+  if (data.length < 14){
+    return [];
+  }
+  return data.slice(data.length-15, data.length)
+}
+
+function lastDay(data){
+  return data[data.length - 1];
 }
 
 class CountryCDR extends React.Component {
@@ -52,86 +63,49 @@ class CountryCDR extends React.Component {
     const responseRecovered = await fetch(url);
     let dataRecovered = await responseRecovered.json();
 
-    /*
-    let data = [
-      {
-        Country: "Albania",
-        CountryCode: "AL",
-        Province: "",
-        City: "",
-        CityCode: "",
-        Lat: "41.15",
-        Lon: "20.17",
-        Cases: 2,
-        Status: "confirmed",
-        Date: "2020-03-09T00:00:00Z",
-      },
-      {
-        Country: "Albania",
-        CountryCode: "AL",
-        Province: "",
-        City: "",
-        CityCode: "",
-        Lat: "41.15",
-        Lon: "20.17",
-        Cases: 10,
-        Status: "confirmed",
-        Date: "2020-03-10T00:00:00Z",
-      },
-      {
-        Country: "Albania",
-        CountryCode: "AL",
-        Province: "",
-        City: "",
-        CityCode: "",
-        Lat: "41.15",
-        Lon: "20.17",
-        Cases: 12,
-        Status: "confirmed",
-        Date: "2020-03-11T00:00:00Z",
-      },
-    ];*/
-
-    // let data = [];
-    let dataConfirmedWithoutProvinces = dataEdit(dataConfirmed);
-    let dataDeathsWithoutProvinces = dataEdit(dataDeaths);
-    let dataRecoveredWithoutProvinces = dataEdit(dataRecovered);
+    let dataConfirmedWithoutDetails = dataEdit(dataConfirmed);
+    let dataDeathsWithoutDetails = dataEdit(dataDeaths);
+    let dataRecoveredWithoutDetails = dataEdit(dataRecovered);
 
     this.setState({
-      dataConfirmedWithoutProvinces,
-      dataDeathsWithoutProvinces,
-      dataRecoveredWithoutProvinces,
+      dataConfirmedWithoutDetails,
+      dataDeathsWithoutDetails,
+      dataRecoveredWithoutDetails,
     });
   }
 
   render() {
     const { classes } = this.props;
-
+    console.log(this.state);
     if (this.state === null) {
       return <Loading />;
-    } else if (this.state.dataConfirmedWithoutProvinces.length <= 0) {
+    } else if (this.state.dataConfirmedWithoutDetails.length <= 0) {
       return (
         <Typography className={classes.noData}>
           This country doesn't have any cases.
         </Typography>
       );
     } else {
-      const CurrentCases = this.state.dataConfirmedWithoutProvinces.length - 1;
-      const CurrentDeaths = this.state.dataDeathsWithoutProvinces.length - 1;
+      const casesLast2Weeks = last2weeks(this.state.dataConfirmedWithoutDetails);
+      const deathsLast2Weeks = last2weeks(this.state.dataDeathsWithoutDetails);
+      const casesLastDay = lastDay(this.state.dataConfirmedWithoutDetails);
+      const deathsLastDay = lastDay(this.state.dataDeathsWithoutDetails);
       return (
         <div className={classes.countryCDR}>
           <GenaralCountrywide
-            cases={this.state.dataConfirmedWithoutProvinces[CurrentCases]}
-            deaths={this.state.dataDeathsWithoutProvinces[CurrentDeaths]}
+            casesLastDay={casesLastDay}
+            deathsLastDay={deathsLastDay}
+            casesLast2Weeks={casesLast2Weeks}
+            deathsLast2Weeks={deathsLast2Weeks}
           />
           <CountryChart
-            dataWithoutProvinces={this.state.dataConfirmedWithoutProvinces}
+            dataWithoutDetails={this.state.dataConfirmedWithoutDetails}
           />
           <CountryChart
-            dataWithoutProvinces={this.state.dataDeathsWithoutProvinces}
+            dataWithoutDetails={this.state.dataDeathsWithoutDetails}
           />
           <CountryChart
-            dataWithoutProvinces={this.state.dataRecoveredWithoutProvinces}
+            dataWithoutDetails={this.state.dataRecoveredWithoutDetails}
           />
         </div>
       );

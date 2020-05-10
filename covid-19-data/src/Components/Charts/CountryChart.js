@@ -9,10 +9,10 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function constructDataPoints(state) {
   let dataPoints = [];
-  for (let i = 0; i < state.dataWithoutProvinces.length; i++) {
+  for (let i = 0; i < state.dataWithoutDetails.length; i++) {
     dataPoints[i] = {
-      x: new Date(state.dataWithoutProvinces[i].Date),
-      y: state.dataWithoutProvinces[i].Cases,
+      x: new Date(state.dataWithoutDetails[i].Date),
+      y: state.dataWithoutDetails[i].Cases,
     };
   }
   return dataPoints;
@@ -52,7 +52,7 @@ class CountryChart extends Component {
     };
 
     let status;
-    switch (this.props.dataWithoutProvinces[0].Status) {
+    switch (this.props.dataWithoutDetails[0].Status) {
       case "confirmed":
         status = "cases";
         break;
@@ -63,14 +63,14 @@ class CountryChart extends Component {
         status = "recovered";
         break;
       default:
-        status = this.props.dataWithoutProvinces[0].Status;
+        status = this.props.dataWithoutDetails[0].Status;
         break;
     }
 
     return (
       <Paper elevation={3} className={classes.chart}>
         <Typography variant="h5" className={classes.title}>
-          Total {status} in {this.props.dataWithoutProvinces[0].Country}
+          Total {status} in {this.props.dataWithoutDetails[0].Country}
         </Typography>
         <CanvasJSChart options={options} onRef={(ref) => (this.chart = ref)} />
       </Paper>

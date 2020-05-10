@@ -136,7 +136,7 @@ class Summary extends React.Component {
           />
 
           <div className={classes.lastUpdate}>
-            <Typography>last update: {time} </Typography>
+            <Typography>Last update: {time} </Typography>
           </div>
         </div>
       </div>
