@@ -49,46 +49,6 @@ class Summary extends React.Component {
     let url = "https://api.covid19api.com/summary";
     const response = await fetch(url);
     const data = await response.json();
-    /*
-    //if maximum requests reached :
-    
-    let data = {
-      Global: {
-        NewConfirmed: 100282,
-        TotalConfirmed: 1162857,
-        NewDeaths: 5658,
-        TotalDeaths: 63263,
-        NewRecovered: 15405,
-        TotalRecovered: 230845,
-      },
-      Countries: [
-        {
-          Country: "Afghanistan",
-          CountryCode: "AF",
-          Slug: "afghanistan",
-          NewConfirmed: 18,
-          TotalConfirmed: 299,
-          NewDeaths: 1,
-          TotalDeaths: 7,
-          NewRecovered: 0,
-          TotalRecovered: 10,
-          Date: "2020-04-05T06:37:00Z",
-        },
-        {
-          Country: "Albania",
-          CountryCode: "AL",
-          Slug: "albania",
-          NewConfirmed: 29,
-          TotalConfirmed: 333,
-          NewDeaths: 3,
-          TotalDeaths: 20,
-          NewRecovered: 10,
-          TotalRecovered: 99,
-          Date: "2020-04-05T06:37:00Z",
-        },
-      ],
-      Date: "2020-04-05T06:37:00Z",
-    };*/
     for (let i = 0; i < data.Countries.length; i++) {
       delete data.Countries[i]["CountryCode"];
       delete data.Countries[i]["Date"];

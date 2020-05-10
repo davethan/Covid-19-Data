@@ -19,9 +19,6 @@ function constructDataPoints(state) {
 }
 
 class CountryChart extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const { classes } = this.props;

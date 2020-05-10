@@ -4,7 +4,8 @@ import { withStyles } from "@material-ui/styles";
 import CountryChart from "../Charts/CountryChart";
 import Typography from "@material-ui/core/Typography";
 import Loading from "../Loading";
-import GenaralCountrywide from "../GeneralCountrywide/GeneralCountrywide";
+import GeneralCountrywide from "../GeneralCountrywide/GeneralCountrywide";
+import Explanations from "../Explanations/Explanations";
 
 function getSlug(slug) {
   slug = slug.slice(9, slug.length);
@@ -14,31 +15,40 @@ function getSlug(slug) {
 function dataEdit(data) {
   let dataWithoutDetails = [];
   let k = 0;
+  let l;
   for (let i = 0; i < data.length; i++) {
-    if (data[i].Province === "") {
-      dataWithoutDetails[k] = data[i];
-      k++;
+    dataWithoutDetails[k] = data[i];
+    l = 1;
+    if (data[i + l]) {
+      while (data[i].Date === data[i + l].Date) {
+        dataWithoutDetails[k].Cases =
+          dataWithoutDetails[k].Cases + data[i + l].Cases;
+        l++;
+        if (!data[i + l]) {
+          break;
+        }
+      }
     }
-  }
-  for (let i = 0; i < dataWithoutDetails.length; i++) {
-    delete dataWithoutDetails[i]["CountryCode"];
-    delete dataWithoutDetails[i]["City"];
-    delete dataWithoutDetails[i]["CityCode"];
-    delete dataWithoutDetails[i]["Lat"];
-    delete dataWithoutDetails[i]["Lon"];
-    delete dataWithoutDetails[i]["Province"];
+    i = i + l - 1;
+    delete dataWithoutDetails[k]["CountryCode"];
+    delete dataWithoutDetails[k]["City"];
+    delete dataWithoutDetails[k]["CityCode"];
+    delete dataWithoutDetails[k]["Lat"];
+    delete dataWithoutDetails[k]["Lon"];
+    delete dataWithoutDetails[k]["Province"];
+    k++;
   }
   return dataWithoutDetails;
 }
 
-function last2weeks(data){
-  if (data.length < 14){
+function last2weeks(data) {
+  if (data.length < 14) {
     return [];
   }
-  return data.slice(data.length-15, data.length)
+  return data.slice(data.length - 15, data.length);
 }
 
-function lastDay(data){
+function lastDay(data) {
   return data[data.length - 1];
 }
 
@@ -76,7 +86,7 @@ class CountryCDR extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.state);
+    // console.log(this.state);
     if (this.state === null) {
       return <Loading />;
     } else if (this.state.dataConfirmedWithoutDetails.length <= 0) {
@@ -86,13 +96,15 @@ class CountryCDR extends React.Component {
         </Typography>
       );
     } else {
-      const casesLast2Weeks = last2weeks(this.state.dataConfirmedWithoutDetails);
+      const casesLast2Weeks = last2weeks(
+        this.state.dataConfirmedWithoutDetails
+      );
       const deathsLast2Weeks = last2weeks(this.state.dataDeathsWithoutDetails);
       const casesLastDay = lastDay(this.state.dataConfirmedWithoutDetails);
       const deathsLastDay = lastDay(this.state.dataDeathsWithoutDetails);
       return (
         <div className={classes.countryCDR}>
-          <GenaralCountrywide
+          <GeneralCountrywide
             casesLastDay={casesLastDay}
             deathsLastDay={deathsLastDay}
             casesLast2Weeks={casesLast2Weeks}
@@ -107,6 +119,7 @@ class CountryCDR extends React.Component {
           <CountryChart
             dataWithoutDetails={this.state.dataRecoveredWithoutDetails}
           />
+          <Explanations />
         </div>
       );
     }
