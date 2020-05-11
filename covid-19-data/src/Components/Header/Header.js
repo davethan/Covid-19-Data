@@ -27,7 +27,7 @@ export default function Header(props) {
       <HideOnScroll {...props}>
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolBar}>
-            <Link className={classes.link} to="/">
+            <Link className={classes.link} to="/Covid-19-Data">
               <Typography variant="h6">Covid-19 Statistics</Typography>
             </Link>
           </Toolbar>

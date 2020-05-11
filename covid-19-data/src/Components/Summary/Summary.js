@@ -58,7 +58,7 @@ class Summary extends React.Component {
         <div className={classes.summaryBody}>
           <Route
             exact
-            path="/"
+            path="/Covid-19-Data"
             render={() => (
               <div>
                 <GeneralGlobally Globals={state.data.Global} />
