@@ -9,32 +9,14 @@ import { Route } from "react-router-dom";
 import CountryCDR from "../CountryCDR/CountryCDR";
 import Header from "../Header/Header";
 
-function timeSinceLastUpdate(date) {
-  let time = date + "";
-  let year = time.slice(0, 4);
-  let month = time.slice(5, 7);
-  let day = time.slice(8, 10);
-  let heure = time.slice(11, 16);
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  if (month[0] == "0") {
-    month = month[1];
-  }
-  month--;
-  month = months[month];
-  time = `on ${day} ${month} ${year} at ${heure}`;
+function timeSinceLastUpdate(dateFromState) {
+  let date = dateFromState + ""; 
+  date = new Date(date);
+  date = date + "";
+  let day = date.slice(0, 15);
+  let heure = date.slice(16, date.length);
+
+  let time = `on ${day} at ${heure}`;
   return time;
 }
 
@@ -96,7 +78,7 @@ class Summary extends React.Component {
           />
 
           <div className={classes.lastUpdate}>
-            <Typography>Last update: {time} </Typography>
+            <Typography>Last update {time} </Typography>
           </div>
         </div>
       </div>
