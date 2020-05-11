@@ -67,7 +67,7 @@ export default function CountriesSummary(props) {
                     return index2 !== 1 ? (
                       <TableCell key={index2}>
                         <Link
-                          to={`/country:${
+                          to={`/Covid-19-Data/country:${
                             props.CountriesSummary[page * rowsPerPage + index1]
                               .Slug
                           }`}

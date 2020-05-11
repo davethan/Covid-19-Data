@@ -8,7 +8,9 @@ import GeneralCountrywide from "../GeneralCountrywide/GeneralCountrywide";
 import Explanations from "../Explanations/Explanations";
 
 function getSlug(slug) {
-  slug = slug.slice(9, slug.length);
+  console.log(slug)
+  slug = slug.slice(23, slug.length);
+  console.log(slug)
   return slug;
 }
 

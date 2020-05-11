@@ -69,7 +69,7 @@ class Summary extends React.Component {
 
           <Route
             exact
-            path="/country:countryName"
+            path="/Covid-19-Data/country:countryName"
             render={(params) => (
               <div>
                 <CountryCDR props={params} />
