@@ -34,6 +34,7 @@ class Summary extends React.Component {
     for (let i = 0; i < data.Countries.length; i++) {
       delete data.Countries[i]["CountryCode"];
       delete data.Countries[i]["Date"];
+      delete data.Countries[i]["Premium"];
     }
     this.setState({ data });
   }
