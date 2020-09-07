@@ -67,7 +67,7 @@ class CountryChart extends Component {
     return (
       <Paper elevation={3} className={classes.chart}>
         <Typography variant="h5" className={classes.title}>
-          Total {status} in {this.props.dataWithoutDetails[0].Country}
+          {this.props.totalOrDaily} {status} in {this.props.dataWithoutDetails[0].Country}
         </Typography>
         <CanvasJSChart options={options} onRef={(ref) => (this.chart = ref)} />
       </Paper>

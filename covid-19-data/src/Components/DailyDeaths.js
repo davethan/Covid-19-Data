@@ -82,6 +82,7 @@ class DailyDeaths extends React.Component {
         <div>
           <CountryChart
             dataWithoutDetails={this.state.dailyDeaths}
+            totalOrDaily = {"Daily"}
           />
         </div>
       );

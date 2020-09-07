@@ -7,7 +7,6 @@ import CountriesSummary from "../CountriesSummary/CountriesSummary";
 import Typography from "@material-ui/core/Typography";
 import { Route } from "react-router-dom";
 import LoadEveryChart from "../LoadEveryChart/LoadEveryChart";
-// import CountryCDR from "../CountryCDR/CountryCDR";
 import Header from "../Header/Header";
 
 function timeSinceLastUpdate(dateFromState) {

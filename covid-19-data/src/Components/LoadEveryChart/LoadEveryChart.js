@@ -17,9 +17,9 @@ class LoadEveryChart extends React.Component {
         return (
             <div className={classes.LoadEveryChart}>
                 <CountryGeneralConfirmedDeaths props={this.props}/>
-                <CountryRecovered props={this.props}/>
                 <DailyCases props={this.props}/>
                 <DailyDeaths props={this.props}/>
+                <CountryRecovered props={this.props}/>
                 <Explanations />
             </div>
         );
