@@ -1,6 +1,5 @@
 const styles = () => ({
   countryCDR: {
-    width: "70%",
     margin: "auto",
   },
   noData: {

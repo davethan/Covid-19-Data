@@ -5,7 +5,6 @@ import CountryChart from "../Charts/CountryChart";
 import Typography from "@material-ui/core/Typography";
 import Loading from "../Loading";
 import GeneralCountrywide from "../GeneralCountrywide/GeneralCountrywide";
-import Explanations from "../Explanations/Explanations";
 
 function getSlug(slug) {
   slug = slug.slice(23, slug.length);
@@ -52,10 +51,9 @@ function lastDay(data) {
   return data[data.length - 1];
 }
 
-class CountryCDR extends React.Component {
+class CountryGeneralConfirmedDeaths extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = null;
   }
 
@@ -70,24 +68,17 @@ class CountryCDR extends React.Component {
     const responseDeaths = await fetch(url);
     let dataDeaths = await responseDeaths.json();
 
-    url = `https://api.covid19api.com/dayone/country/${slug}/status/recovered`;
-    const responseRecovered = await fetch(url);
-    let dataRecovered = await responseRecovered.json();
-
     let dataConfirmedWithoutDetails = dataEdit(dataConfirmed);
     let dataDeathsWithoutDetails = dataEdit(dataDeaths);
-    let dataRecoveredWithoutDetails = dataEdit(dataRecovered);
 
     this.setState({
       dataConfirmedWithoutDetails,
-      dataDeathsWithoutDetails,
-      dataRecoveredWithoutDetails,
+      dataDeathsWithoutDetails
     });
   }
 
   render() {
     const { classes } = this.props;
-    // console.log(this.state);
     if (this.state === null) {
       return <Loading />;
     } else if (this.state.dataConfirmedWithoutDetails.length <= 0) {
@@ -104,7 +95,7 @@ class CountryCDR extends React.Component {
       const casesLastDay = lastDay(this.state.dataConfirmedWithoutDetails);
       const deathsLastDay = lastDay(this.state.dataDeathsWithoutDetails);
       return (
-        <div className={classes.countryCDR}>
+        <div>
           <GeneralCountrywide
             casesLastDay={casesLastDay}
             deathsLastDay={deathsLastDay}
@@ -117,14 +108,10 @@ class CountryCDR extends React.Component {
           <CountryChart
             dataWithoutDetails={this.state.dataDeathsWithoutDetails}
           />
-          <CountryChart
-            dataWithoutDetails={this.state.dataRecoveredWithoutDetails}
-          />
-          <Explanations />
         </div>
       );
     }
   }
 }
 
-export default withStyles(styles)(CountryCDR);
+export default withStyles(styles)(CountryGeneralConfirmedDeaths);

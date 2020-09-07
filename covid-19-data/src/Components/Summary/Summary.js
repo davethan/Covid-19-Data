@@ -2,11 +2,12 @@ import React from "react";
 import styles from "./Styles.js";
 import { withStyles } from "@material-ui/styles";
 import Loading from "../Loading";
-import GeneralGlobally from "../GeneralGlobally/GeneralGlobally";
+import GeneralGlobally from "../GeneralGlobally";
 import CountriesSummary from "../CountriesSummary/CountriesSummary";
 import Typography from "@material-ui/core/Typography";
 import { Route } from "react-router-dom";
-import CountryCDR from "../CountryCDR/CountryCDR";
+import LoadEveryChart from "../LoadEveryChart/LoadEveryChart";
+// import CountryCDR from "../CountryCDR/CountryCDR";
 import Header from "../Header/Header";
 
 function timeSinceLastUpdate(dateFromState) {
@@ -73,7 +74,7 @@ class Summary extends React.Component {
             path="/Covid-19-Data/country:countryName"
             render={(params) => (
               <div>
-                <CountryCDR props={params} />
+                <LoadEveryChart props={params} />
               </div>
             )}
           />

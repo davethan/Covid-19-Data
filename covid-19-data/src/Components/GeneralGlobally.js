@@ -2,7 +2,7 @@ import React from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
-import useStyles from "../GeneralCountrywide/Styles";
+import useStyles from "./GeneralCountrywide/Styles";
 
 export default function GeneralGlobally(props) {
   const classes = useStyles();
