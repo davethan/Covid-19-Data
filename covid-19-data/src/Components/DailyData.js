@@ -2,6 +2,53 @@ import React from "react";
 import styles from "./CountryGeneralConfirmedDeaths/Styles";
 import { withStyles } from "@material-ui/styles";
 import CountryChart from "./Charts/CountryChart";
+import Loading from "./Loading";
+
+function makeDaily(data){
+    let i;
+    for (i=data.length-1;i>0;i--){
+        data[i].Cases = data[i].Cases - data[i-1].Cases
+    }
+    return data;
+}
+
+class DailyData extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = null;
+  }
+
+  componentDidMount() {
+    const dailyData = makeDaily(this.props.dataWithoutDetails)
+    this.setState({
+        dailyData
+    });
+  }
+
+  render() {
+    if (this.state === null) {
+      return <Loading />;
+    } else {
+      return (
+        <CountryChart
+          dataWithoutDetails={this.state.dailyData}
+          totalOrDaily = {"Daily"}
+        />
+      );
+    }
+  }
+}
+
+export default withStyles(styles)(DailyData);
+
+//
+//
+/* Keeping the "DailyCases" file in case we need to change again
+
+import React from "react";
+import styles from "./CountryGeneralConfirmedDeaths/Styles";
+import { withStyles } from "@material-ui/styles";
+import CountryChart from "./Charts/CountryChart";
 import Typography from "@material-ui/core/Typography";
 import Loading from "./Loading";
 
@@ -47,7 +94,7 @@ function makeDaily(data){
     return data;
 }
 
-class DailyDeaths extends React.Component {
+class DailyCases extends React.Component {
   constructor(props) {
     super(props);
     this.state = null;
@@ -56,14 +103,14 @@ class DailyDeaths extends React.Component {
   async componentDidMount() {
     const slug = getSlug(this.props.props.props.match.url);
 
-    const url = `https://api.covid19api.com/dayone/country/${slug}/status/deaths`;
+    const url = `https://api.covid19api.com/dayone/country/${slug}/status/confirmed`;
     const response = await fetch(url);
     let data = await response.json();
 
     let dataWithoutDetails = dataEdit(data);
-    let dailyDeaths = makeDaily(dataWithoutDetails)
+    let dailyData = makeDaily(dataWithoutDetails)
     this.setState({
-        dailyDeaths
+        dailyData
     });
   }
 
@@ -71,17 +118,17 @@ class DailyDeaths extends React.Component {
     const { classes } = this.props;
     if (this.state === null) {
       return <Loading />;
-    } else if (this.state.dailyDeaths.length <= 0) {
+    } else if (this.state.dailyData.length <= 0) {
       return (
         <Typography className={classes.noData}>
-          This country doesn't have any deaths.
+          This country doesn't have any recovered.
         </Typography>
       );
     } else {
       return (
         <div>
           <CountryChart
-            dataWithoutDetails={this.state.dailyDeaths}
+            dataWithoutDetails={this.state.dailyData}
             totalOrDaily = {"Daily"}
           />
         </div>
@@ -90,4 +137,5 @@ class DailyDeaths extends React.Component {
   }
 }
 
-export default withStyles(styles)(DailyDeaths);
+export default withStyles(styles)(DailyCases);
+*/

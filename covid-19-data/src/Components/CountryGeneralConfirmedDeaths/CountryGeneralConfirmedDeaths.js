@@ -5,6 +5,7 @@ import CountryChart from "../Charts/CountryChart";
 import Typography from "@material-ui/core/Typography";
 import Loading from "../Loading";
 import GeneralCountrywide from "../GeneralCountrywide/GeneralCountrywide";
+import DailyData from "../DailyData.js";
 
 function getSlug(slug) {
   slug = slug.slice(23, slug.length);
@@ -106,10 +107,12 @@ class CountryGeneralConfirmedDeaths extends React.Component {
             dataWithoutDetails={this.state.dataConfirmedWithoutDetails}
             totalOrDaily = {"Total"}
           />
+          <DailyData dataWithoutDetails={this.state.dataConfirmedWithoutDetails}/>
           <CountryChart
             dataWithoutDetails={this.state.dataDeathsWithoutDetails}
             totalOrDaily = {"Total"}
           />
+          <DailyData dataWithoutDetails={this.state.dataDeathsWithoutDetails}/>
         </div>
       );
     }

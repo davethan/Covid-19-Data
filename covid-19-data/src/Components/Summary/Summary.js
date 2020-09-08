@@ -72,9 +72,7 @@ class Summary extends React.Component {
             exact
             path="/Covid-19-Data/country:countryName"
             render={(params) => (
-              <div>
-                <LoadEveryChart props={params} />
-              </div>
+              <LoadEveryChart props={params} />
             )}
           />
 
