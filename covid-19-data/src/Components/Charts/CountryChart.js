@@ -24,6 +24,7 @@ class CountryChart extends Component {
     const { classes } = this.props;
     let dataPoints = null;
     dataPoints = constructDataPoints(this.props);
+    const type = this.props.typeOfChart
 
     const options = {
       animationEnabled: true,
@@ -42,8 +43,9 @@ class CountryChart extends Component {
         {
           yValueFormatString: "#,###",
           xValueFormatString: "",
-          type: "line",
+          type: type,
           dataPoints: dataPoints,
+          color: "#295191"
         },
       ],
     };

@@ -105,11 +105,13 @@ class CountryGeneralConfirmedDeaths extends React.Component {
           />
           <CountryChart
             dataWithoutDetails={this.state.dataConfirmedWithoutDetails}
+            typeOfChart = {"line"}
             totalOrDaily = {"Total"}
           />
           <DailyData dataWithoutDetails={this.state.dataConfirmedWithoutDetails}/>
           <CountryChart
             dataWithoutDetails={this.state.dataDeathsWithoutDetails}
+            typeOfChart = {"line"}
             totalOrDaily = {"Total"}
           />
           <DailyData dataWithoutDetails={this.state.dataDeathsWithoutDetails}/>

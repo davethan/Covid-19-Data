@@ -74,6 +74,7 @@ class CountryRecovered extends React.Component {
         <div>
           <CountryChart
             dataWithoutDetails={this.state.dataRecoveredWithoutDetails}
+            typeOfChart = {"line"}
             totalOrDaily = {"Total"}
           />
         </div>
