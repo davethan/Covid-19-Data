@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { Route } from "react-router-dom";
 import LoadEveryChart from "../LoadEveryChart/LoadEveryChart";
 import Header from "../Header/Header";
+import SortByContinents from "../SortByContinents/SortByContinents";
 
 function timeSinceLastUpdate(dateFromState) {
   let date = dateFromState + ""; 
@@ -21,7 +22,6 @@ function timeSinceLastUpdate(dateFromState) {
 }
 
 function compareValues(key, order = 'asc') {
-  console.log(key)
   return function innerSort(a, b) {
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
       return 0;
@@ -70,11 +70,12 @@ class Summary extends React.Component {
       TotalRecovered: true,
       Country: true,
     }
-    this.setState({ data, asc });
+    let dataToShow = data.Countries
+    this.setState({ data, asc, dataToShow });
   }
 
   sortTable(index) {
-    let data = this.state.data.Countries
+    let dataToShowToTable = this.state.dataToShow
     let sortBy
     switch (index) {
       case 2:
@@ -104,16 +105,39 @@ class Summary extends React.Component {
     let howToSort = 'asc'
     if (ascOrDesc === false){ howToSort = 'desc'}
 
-    data.sort(compareValues(sortBy, howToSort));
-    this.setState(({data}) => ({
-      data
-    }));
-    this.setState(prevState  => ({
-      asc:{
+    dataToShowToTable.sort(compareValues(sortBy, howToSort));
+    // this.setState({ dataToShow: dataToShow });
+    // this.setState(prevState  => ({
+    //   asc:{
+    //     ...prevState.asc,
+    //     [sortBy]: ascOrDesc
+    //   }
+    // }));
+    /////////////////////////////////////////////////////
+    
+    this.setState(prevState => ({
+      asc: {
         ...prevState.asc,
         [sortBy]: ascOrDesc
-      }
-    }));
+      },
+      data:{
+        ...prevState.data,
+      },
+      dataToShow: dataToShowToTable
+    }))
+  }
+
+  showByContinents(index){
+    let countriesToShow
+    switch (index) {
+      case "Oceania":
+        countriesToShow = ["Australia", "New Zealand", "Papua New Guinea", "Fiji"];
+        break;
+      default:
+        countriesToShow = ["Country"];
+        break;
+    }
+    // console.log(countriesToShow)
   }
 
   render() {
@@ -140,7 +164,8 @@ class Summary extends React.Component {
             render={() => (
               <div>
                 <GeneralGlobally Globals={state.data.Global} />
-                <CountriesSummary sortTable={this.sortTable} CountriesSummary={state.data.Countries} />
+                <SortByContinents showByContinents={this.showByContinents}/>
+                <CountriesSummary sortTable={this.sortTable} CountriesSummary={state.dataToShow} />
               </div>
             )}
           />
