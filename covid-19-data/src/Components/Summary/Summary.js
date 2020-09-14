@@ -50,6 +50,7 @@ class Summary extends React.Component {
     this.state = null;
     this.componentDidMount = this.componentDidMount.bind(this);
     this.sortTable = this.sortTable.bind(this);
+    this.showByContinents = this.showByContinents.bind(this);
   }
 
   async componentDidMount() {
@@ -71,11 +72,13 @@ class Summary extends React.Component {
       Country: true,
     }
     let dataToShow = data.Countries
-    this.setState({ data, asc, dataToShow });
+    let continent = "All"
+    this.setState({data, asc, dataToShow, continent});
   }
 
   sortTable(index) {
     let dataToShowToTable = this.state.dataToShow
+    // console.log(dataToShowToTable) //This is bizzare...
     let sortBy
     switch (index) {
       case 2:
@@ -106,15 +109,7 @@ class Summary extends React.Component {
     if (ascOrDesc === false){ howToSort = 'desc'}
 
     dataToShowToTable.sort(compareValues(sortBy, howToSort));
-    // this.setState({ dataToShow: dataToShow });
-    // this.setState(prevState  => ({
-    //   asc:{
-    //     ...prevState.asc,
-    //     [sortBy]: ascOrDesc
-    //   }
-    // }));
-    /////////////////////////////////////////////////////
-    
+    //!!!THIS DOES NOT WORK PROPERLY!!!
     this.setState(prevState => ({
       asc: {
         ...prevState.asc,
@@ -131,13 +126,55 @@ class Summary extends React.Component {
     let countriesToShow
     switch (index) {
       case "Oceania":
-        countriesToShow = ["Australia", "New Zealand", "Papua New Guinea", "Fiji"];
+        countriesToShow = ["australia", "new-zealand", "papua-new-guinea", "fiji"];
+        break;
+      case "North America":
+        countriesToShow = ["antigua-and-barbuda", "bahamas", "barbados", "belize", "canada", "costa-rica", "cuba", "dominica", "dominican-republic", "el-salvador", "grenada", "guatemala", "haiti", "honduras", "jamaica", "mexico", "nicaragua", "panama", "saint-kitts-and-nevis", "saint-lucia", "saint-vincent-and-the-grenadines", "trinidad-and-tobago", "united-states"];
+        break;
+      case "Asia":
+        countriesToShow = ["afghanistan", "armenia", "azerbaijan", "bahrain", "bangladesh", "bhutan", "brunei", "cambodia", "china", "georgia", "india", "indonesia", "iran", "iraq", "israel", "japan", "jordan", "kazakhstan", "kuwait", "kyrgyzstan", "lao-pdr", "lebanon", "macao-sar-china", "malaysia", "maldives", "mongolia", "myanmar", "nepal", "oman", "pakistan", "palestine", "philippines", "qatar", "korea-south", "saudi-arabia", "singapore", "sri-lanka", "syria", "taiwan", "tajikistan", "thailand", "timor-leste", "turkey", "united-arab-emirates", "uzbekistan", "vietnam", "yemen"];
+        break;
+      case "Africa":
+        countriesToShow = ["algeria", "angola", "benin", "botswana", "burkina-faso", "burundi", "cape-verde", "cameroon", "central-african-republic", "chad", "comoros", "congo-brazzaville", "congo-kinshasa", "djibouti", "egypt", "equatorial-guinea", "eritrea", "swaziland", "ethiopia", "gabon", "gambia", "ghana", "guinea", "guinea-bissau", "cote-divoire", "kenya", "lesotho", "liberia", "libya", "madagascar", "malawi", "mali", "mauritania", "mauritius", "morocco", "mozambique", "namibia", "niger", "nigeria", "rwanda", "réunion", "sao-tome-and-principe", "senegal", "seychelles", "sierra-leone", "somalia", "south-africa", "south-sudan", "sudan", "tanzania", "togo", "tunisia", "uganda", "western-sahara", "zambia", "zimbabwe"];
+        break;
+      case "Europe":
+        countriesToShow = ["albania", "andorra", "austria", "belarus", "belgium", "bosnia-and-herzegovina", "bulgaria", "croatia", "cyprus", "czech-republic", "denmark", "estonia", "finland", "france", "germany", "greece", "hungary", "iceland", "ireland", "italy", "latvia", "liechtenstein", "lithuania", "luxembourg", "malta", "moldova", "monaco", "montenegro", "netherlands", "macedonia", "norway", "poland", "portugal", "romania", "russia", "san-marino", "serbia", "slovakia", "slovenia", "spain", "sweden", "switzerland", "united-kingdom", "ukraine", "holy-see-vatican-city-state", "kosovo"];
+        break;
+      case "South America":
+        countriesToShow = ["argentina", "bolivia", "brazil", "chile", "colombia", "ecuador", "guyana", "paraguay", "peru", "uruguay", "suriname", "venezuela"];
         break;
       default:
-        countriesToShow = ["Country"];
+        countriesToShow = this.state.data.Countries
         break;
     }
-    // console.log(countriesToShow)
+    let i;
+    let dataOfCountriesToShow = [];
+    if (index !== "All"){
+      let j;
+      let k = 0;
+      for (i = 0; i < this.state.data.Countries.length; i++){
+        for (j = 0; j < countriesToShow.length; j++){
+          if (this.state.data.Countries[i].Slug === countriesToShow[j]){
+            dataOfCountriesToShow[k] = this.state.data.Countries[i]
+            k++
+            break
+          }
+        }
+      }
+    } else {
+      dataOfCountriesToShow = countriesToShow
+    }
+
+    this.setState(prevState => ({
+      asc: {
+        ...prevState.asc,
+      },
+      data:{
+        ...prevState.data,
+      },
+      dataToShow: dataOfCountriesToShow,
+      continent: index
+    }))
   }
 
   render() {
@@ -164,7 +201,7 @@ class Summary extends React.Component {
             render={() => (
               <div>
                 <GeneralGlobally Globals={state.data.Global} />
-                <SortByContinents showByContinents={this.showByContinents}/>
+                <SortByContinents continent={this.state.continent} showByContinents={this.showByContinents}/>
                 <CountriesSummary sortTable={this.sortTable} CountriesSummary={state.dataToShow} />
               </div>
             )}

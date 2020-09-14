@@ -9,7 +9,7 @@ export default function FormControlLabelPlacement(props) {
     const classes = useStyles();
   return (
     <FormControl className={classes.form} component="fieldset">
-      <RadioGroup className={classes.radioGroup} aria-label="position" name="position" defaultValue="All">
+      <RadioGroup className={classes.radioGroup} aria-label="position" name="position" defaultValue={props.continent}>
         <FormControlLabel
           value="All"
           control={<Radio color="primary" />}
