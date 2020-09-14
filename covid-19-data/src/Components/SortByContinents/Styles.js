@@ -12,6 +12,9 @@ const useStyles = makeStyles({
   form: {
     minWidth: "fit-content",
     width: "100%",
+  },
+  individual: {
+    width: "5.1rem",
   }
 });
 export default useStyles;

@@ -11,6 +11,7 @@ export default function FormControlLabelPlacement(props) {
     <FormControl className={classes.form} component="fieldset">
       <RadioGroup className={classes.radioGroup} aria-label="position" name="position" defaultValue={props.continent}>
         <FormControlLabel
+          className={classes.individual}
           value="All"
           control={<Radio color="primary" />}
           label="All"
@@ -18,13 +19,23 @@ export default function FormControlLabelPlacement(props) {
           onClick={() => props.showByContinents("All")}
         />
         <FormControlLabel
+          className={classes.individual}
           value="North America"
           control={<Radio color="primary" />}
-          label="North America"
+          label="N. America"
           labelPlacement="top"
           onClick={() => props.showByContinents("North America")}
         />
         <FormControlLabel
+          className={classes.individual}
+          value="South America"
+          control={<Radio color="primary" />}
+          label="S. America"
+          labelPlacement="top"
+          onClick={() => props.showByContinents("South America")}
+        />
+        <FormControlLabel
+          className={classes.individual}
           value="Asia"
           control={<Radio color="primary" />}
           label="Asia"
@@ -32,6 +43,7 @@ export default function FormControlLabelPlacement(props) {
           onClick={() => props.showByContinents("Asia")}
         />
         <FormControlLabel
+          className={classes.individual}
           value="Africa"
           control={<Radio color="primary" />}
           label="Africa"
@@ -39,6 +51,7 @@ export default function FormControlLabelPlacement(props) {
           onClick={() => props.showByContinents("Africa")}
         />
         <FormControlLabel
+          className={classes.individual}
           value="Europe"
           control={<Radio color="primary" />}
           label="Europe"
@@ -46,18 +59,12 @@ export default function FormControlLabelPlacement(props) {
           onClick={() => props.showByContinents("Europe")}
         />
         <FormControlLabel
+          className={classes.individual}
           value="Oceania"
           control={<Radio color="primary" />}
           label="Oceania"
           labelPlacement="top"
           onClick={() => props.showByContinents("Oceania")}
-        />
-        <FormControlLabel
-          value="South America"
-          control={<Radio color="primary" />}
-          label="South America"
-          labelPlacement="top"
-          onClick={() => props.showByContinents("South America")}
         />
       </RadioGroup>
     </FormControl>

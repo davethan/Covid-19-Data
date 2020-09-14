@@ -147,10 +147,10 @@ class Summary extends React.Component {
         countriesToShow = this.state.data.Countries
         break;
     }
-    let i;
+    
     let dataOfCountriesToShow = [];
     if (index !== "All"){
-      let j;
+      let j, i;
       let k = 0;
       for (i = 0; i < this.state.data.Countries.length; i++){
         for (j = 0; j < countriesToShow.length; j++){
