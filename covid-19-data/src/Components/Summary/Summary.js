@@ -72,8 +72,7 @@ class Summary extends React.Component {
       Country: true,
     }
     let dataToShow = data.Countries
-    let continent = "All"
-    this.setState({data, asc, dataToShow, continent});
+    this.setState({data, asc, dataToShow});
   }
 
   sortTable(index) {
@@ -172,8 +171,7 @@ class Summary extends React.Component {
       data:{
         ...prevState.data,
       },
-      dataToShow: dataOfCountriesToShow,
-      continent: index
+      dataToShow: dataOfCountriesToShow
     }))
   }
 
@@ -201,7 +199,7 @@ class Summary extends React.Component {
             render={() => (
               <div>
                 <GeneralGlobally Globals={state.data.Global} />
-                <SortByContinents continent={this.state.continent} showByContinents={this.showByContinents}/>
+                <SortByContinents showByContinents={this.showByContinents}/>
                 <CountriesSummary sortTable={this.sortTable} CountriesSummary={state.dataToShow} />
               </div>
             )}
