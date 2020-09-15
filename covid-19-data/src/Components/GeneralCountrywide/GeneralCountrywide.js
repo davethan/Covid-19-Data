@@ -39,8 +39,14 @@ export default function GeneralCountrywide(props) {
   const casesStatus = getCasesStatus(props.casesLast2Weeks);
   const deathsStatus = getCasesStatus(props.deathsLast2Weeks);
 
-  let casesLastDayDots = props.casesLastDay.Cases.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-  let deathsLastDayDots = props.deathsLastDay.Cases.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+  let casesLastDayDots = props.casesLastDay.Cases.toString().replace(
+    /(\d)(?=(\d\d\d)+(?!\d))/g,
+    "$1."
+  );
+  let deathsLastDayDots = props.deathsLastDay.Cases.toString().replace(
+    /(\d)(?=(\d\d\d)+(?!\d))/g,
+    "$1."
+  );
 
   return (
     <div className={classes.root}>

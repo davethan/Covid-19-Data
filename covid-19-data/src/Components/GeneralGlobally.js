@@ -11,8 +11,14 @@ export default function GeneralGlobally(props) {
   let dr = (data.TotalDeaths * 100) / data.TotalConfirmed;
   dr = Math.round(dr * 10) / 10;
 
-  let totalCasesDots = data.TotalConfirmed.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-  let totalDeathsDots = data.TotalDeaths.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+  let totalCasesDots = data.TotalConfirmed.toString().replace(
+    /(\d)(?=(\d\d\d)+(?!\d))/g,
+    "$1."
+  );
+  let totalDeathsDots = data.TotalDeaths.toString().replace(
+    /(\d)(?=(\d\d\d)+(?!\d))/g,
+    "$1."
+  );
 
   return (
     <div className={classes.root}>

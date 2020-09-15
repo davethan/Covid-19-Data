@@ -11,7 +11,7 @@ import Header from "../Header/Header";
 import SortByContinents from "../SortByContinents/SortByContinents";
 
 function timeSinceLastUpdate(dateFromState) {
-  let date = dateFromState + ""; 
+  let date = dateFromState + "";
   date = new Date(date);
   date = date + "";
   let day = date.slice(0, 15);
@@ -21,16 +21,14 @@ function timeSinceLastUpdate(dateFromState) {
   return time;
 }
 
-function compareValues(key, order = 'asc') {
+function compareValues(key, order = "asc") {
   return function innerSort(a, b) {
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
       return 0;
     }
 
-    const varA = (typeof a[key] === 'string')
-      ? a[key].toUpperCase() : a[key];
-    const varB = (typeof b[key] === 'string')
-      ? b[key].toUpperCase() : b[key];
+    const varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
+    const varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
 
     let comparison = 0;
     if (varA > varB) {
@@ -38,9 +36,7 @@ function compareValues(key, order = 'asc') {
     } else if (varA < varB) {
       comparison = -1;
     }
-    return (
-      (order === 'desc') ? (comparison * -1) : comparison
-    );
+    return order === "desc" ? comparison * -1 : comparison;
   };
 }
 
@@ -70,15 +66,15 @@ class Summary extends React.Component {
       NewRecovered: true,
       TotalRecovered: true,
       Country: true,
-    }
-    let dataToShow = data.Countries
-    this.setState({data, asc, dataToShow});
+    };
+    let dataToShow = data.Countries;
+    this.setState({ data, asc, dataToShow });
   }
 
   sortTable(index) {
-    let dataToShowToTable = this.state.dataToShow
+    let dataToShowToTable = this.state.dataToShow;
     // console.log(dataToShowToTable) //This is bizzare...
-    let sortBy
+    let sortBy;
     switch (index) {
       case 2:
         sortBy = "NewConfirmed";
@@ -104,75 +100,271 @@ class Summary extends React.Component {
     }
 
     let ascOrDesc = !this.state.asc[sortBy];
-    let howToSort = 'asc'
-    if (ascOrDesc === false){ howToSort = 'desc'}
+    let howToSort = "asc";
+    if (ascOrDesc === false) {
+      howToSort = "desc";
+    }
 
     dataToShowToTable.sort(compareValues(sortBy, howToSort));
     //!!!THIS DOES NOT WORK PROPERLY!!!
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       asc: {
         ...prevState.asc,
-        [sortBy]: ascOrDesc
+        [sortBy]: ascOrDesc,
       },
-      data:{
+      data: {
         ...prevState.data,
       },
-      dataToShow: dataToShowToTable
-    }))
+      dataToShow: dataToShowToTable,
+    }));
   }
 
-  showByContinents(index){
-    let countriesToShow
+  showByContinents(index) {
+    let countriesToShow;
     switch (index) {
       case "Oceania":
-        countriesToShow = ["australia", "new-zealand", "papua-new-guinea", "fiji"];
+        countriesToShow = [
+          "australia",
+          "new-zealand",
+          "papua-new-guinea",
+          "fiji",
+        ];
         break;
       case "North America":
-        countriesToShow = ["antigua-and-barbuda", "bahamas", "barbados", "belize", "canada", "costa-rica", "cuba", "dominica", "dominican-republic", "el-salvador", "grenada", "guatemala", "haiti", "honduras", "jamaica", "mexico", "nicaragua", "panama", "saint-kitts-and-nevis", "saint-lucia", "saint-vincent-and-the-grenadines", "trinidad-and-tobago", "united-states"];
+        countriesToShow = [
+          "antigua-and-barbuda",
+          "bahamas",
+          "barbados",
+          "belize",
+          "canada",
+          "costa-rica",
+          "cuba",
+          "dominica",
+          "dominican-republic",
+          "el-salvador",
+          "grenada",
+          "guatemala",
+          "haiti",
+          "honduras",
+          "jamaica",
+          "mexico",
+          "nicaragua",
+          "panama",
+          "saint-kitts-and-nevis",
+          "saint-lucia",
+          "saint-vincent-and-the-grenadines",
+          "trinidad-and-tobago",
+          "united-states",
+        ];
         break;
       case "Asia":
-        countriesToShow = ["afghanistan", "armenia", "azerbaijan", "bahrain", "bangladesh", "bhutan", "brunei", "cambodia", "china", "georgia", "india", "indonesia", "iran", "iraq", "israel", "japan", "jordan", "kazakhstan", "kuwait", "kyrgyzstan", "lao-pdr", "lebanon", "macao-sar-china", "malaysia", "maldives", "mongolia", "myanmar", "nepal", "oman", "pakistan", "palestine", "philippines", "qatar", "korea-south", "saudi-arabia", "singapore", "sri-lanka", "syria", "taiwan", "tajikistan", "thailand", "timor-leste", "turkey", "united-arab-emirates", "uzbekistan", "vietnam", "yemen"];
+        countriesToShow = [
+          "afghanistan",
+          "armenia",
+          "azerbaijan",
+          "bahrain",
+          "bangladesh",
+          "bhutan",
+          "brunei",
+          "cambodia",
+          "china",
+          "georgia",
+          "india",
+          "indonesia",
+          "iran",
+          "iraq",
+          "israel",
+          "japan",
+          "jordan",
+          "kazakhstan",
+          "kuwait",
+          "kyrgyzstan",
+          "lao-pdr",
+          "lebanon",
+          "macao-sar-china",
+          "malaysia",
+          "maldives",
+          "mongolia",
+          "myanmar",
+          "nepal",
+          "oman",
+          "pakistan",
+          "palestine",
+          "philippines",
+          "qatar",
+          "korea-south",
+          "saudi-arabia",
+          "singapore",
+          "sri-lanka",
+          "syria",
+          "taiwan",
+          "tajikistan",
+          "thailand",
+          "timor-leste",
+          "turkey",
+          "united-arab-emirates",
+          "uzbekistan",
+          "vietnam",
+          "yemen",
+        ];
         break;
       case "Africa":
-        countriesToShow = ["algeria", "angola", "benin", "botswana", "burkina-faso", "burundi", "cape-verde", "cameroon", "central-african-republic", "chad", "comoros", "congo-brazzaville", "congo-kinshasa", "djibouti", "egypt", "equatorial-guinea", "eritrea", "swaziland", "ethiopia", "gabon", "gambia", "ghana", "guinea", "guinea-bissau", "cote-divoire", "kenya", "lesotho", "liberia", "libya", "madagascar", "malawi", "mali", "mauritania", "mauritius", "morocco", "mozambique", "namibia", "niger", "nigeria", "rwanda", "réunion", "sao-tome-and-principe", "senegal", "seychelles", "sierra-leone", "somalia", "south-africa", "south-sudan", "sudan", "tanzania", "togo", "tunisia", "uganda", "western-sahara", "zambia", "zimbabwe"];
+        countriesToShow = [
+          "algeria",
+          "angola",
+          "benin",
+          "botswana",
+          "burkina-faso",
+          "burundi",
+          "cape-verde",
+          "cameroon",
+          "central-african-republic",
+          "chad",
+          "comoros",
+          "congo-brazzaville",
+          "congo-kinshasa",
+          "djibouti",
+          "egypt",
+          "equatorial-guinea",
+          "eritrea",
+          "swaziland",
+          "ethiopia",
+          "gabon",
+          "gambia",
+          "ghana",
+          "guinea",
+          "guinea-bissau",
+          "cote-divoire",
+          "kenya",
+          "lesotho",
+          "liberia",
+          "libya",
+          "madagascar",
+          "malawi",
+          "mali",
+          "mauritania",
+          "mauritius",
+          "morocco",
+          "mozambique",
+          "namibia",
+          "niger",
+          "nigeria",
+          "rwanda",
+          "réunion",
+          "sao-tome-and-principe",
+          "senegal",
+          "seychelles",
+          "sierra-leone",
+          "somalia",
+          "south-africa",
+          "south-sudan",
+          "sudan",
+          "tanzania",
+          "togo",
+          "tunisia",
+          "uganda",
+          "western-sahara",
+          "zambia",
+          "zimbabwe",
+        ];
         break;
       case "Europe":
-        countriesToShow = ["albania", "andorra", "austria", "belarus", "belgium", "bosnia-and-herzegovina", "bulgaria", "croatia", "cyprus", "czech-republic", "denmark", "estonia", "finland", "france", "germany", "greece", "hungary", "iceland", "ireland", "italy", "latvia", "liechtenstein", "lithuania", "luxembourg", "malta", "moldova", "monaco", "montenegro", "netherlands", "macedonia", "norway", "poland", "portugal", "romania", "russia", "san-marino", "serbia", "slovakia", "slovenia", "spain", "sweden", "switzerland", "united-kingdom", "ukraine", "holy-see-vatican-city-state", "kosovo"];
+        countriesToShow = [
+          "albania",
+          "andorra",
+          "austria",
+          "belarus",
+          "belgium",
+          "bosnia-and-herzegovina",
+          "bulgaria",
+          "croatia",
+          "cyprus",
+          "czech-republic",
+          "denmark",
+          "estonia",
+          "finland",
+          "france",
+          "germany",
+          "greece",
+          "hungary",
+          "iceland",
+          "ireland",
+          "italy",
+          "latvia",
+          "liechtenstein",
+          "lithuania",
+          "luxembourg",
+          "malta",
+          "moldova",
+          "monaco",
+          "montenegro",
+          "netherlands",
+          "macedonia",
+          "norway",
+          "poland",
+          "portugal",
+          "romania",
+          "russia",
+          "san-marino",
+          "serbia",
+          "slovakia",
+          "slovenia",
+          "spain",
+          "sweden",
+          "switzerland",
+          "united-kingdom",
+          "ukraine",
+          "holy-see-vatican-city-state",
+          "kosovo",
+        ];
         break;
       case "South America":
-        countriesToShow = ["argentina", "bolivia", "brazil", "chile", "colombia", "ecuador", "guyana", "paraguay", "peru", "uruguay", "suriname", "venezuela"];
+        countriesToShow = [
+          "argentina",
+          "bolivia",
+          "brazil",
+          "chile",
+          "colombia",
+          "ecuador",
+          "guyana",
+          "paraguay",
+          "peru",
+          "uruguay",
+          "suriname",
+          "venezuela",
+        ];
         break;
       default:
-        countriesToShow = this.state.data.Countries
+        countriesToShow = this.state.data.Countries;
         break;
     }
-    
+
     let dataOfCountriesToShow = [];
-    if (index !== "All"){
+    if (index !== "All") {
       let j, i;
       let k = 0;
-      for (i = 0; i < this.state.data.Countries.length; i++){
-        for (j = 0; j < countriesToShow.length; j++){
-          if (this.state.data.Countries[i].Slug === countriesToShow[j]){
-            dataOfCountriesToShow[k] = this.state.data.Countries[i]
-            k++
-            break
+      for (i = 0; i < this.state.data.Countries.length; i++) {
+        for (j = 0; j < countriesToShow.length; j++) {
+          if (this.state.data.Countries[i].Slug === countriesToShow[j]) {
+            dataOfCountriesToShow[k] = this.state.data.Countries[i];
+            k++;
+            break;
           }
         }
       }
     } else {
-      dataOfCountriesToShow = countriesToShow
+      dataOfCountriesToShow = countriesToShow;
     }
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       asc: {
         ...prevState.asc,
       },
-      data:{
+      data: {
         ...prevState.data,
       },
-      dataToShow: dataOfCountriesToShow
-    }))
+      dataToShow: dataOfCountriesToShow,
+    }));
   }
 
   render() {
@@ -199,8 +391,11 @@ class Summary extends React.Component {
             render={() => (
               <div>
                 <GeneralGlobally Globals={state.data.Global} />
-                <SortByContinents showByContinents={this.showByContinents}/>
-                <CountriesSummary sortTable={this.sortTable} CountriesSummary={state.dataToShow} />
+                <SortByContinents showByContinents={this.showByContinents} />
+                <CountriesSummary
+                  sortTable={this.sortTable}
+                  CountriesSummary={state.dataToShow}
+                />
               </div>
             )}
           />
@@ -208,9 +403,7 @@ class Summary extends React.Component {
           <Route
             exact
             path="/Covid-19-Data/country:countryName"
-            render={(params) => (
-              <LoadEveryChart props={params} />
-            )}
+            render={(params) => <LoadEveryChart props={params} />}
           />
 
           <div className={classes.lastUpdate}>

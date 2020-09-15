@@ -55,7 +55,7 @@ class CountryRecovered extends React.Component {
     let dataRecoveredWithoutDetails = dataEdit(dataRecovered);
 
     this.setState({
-        dataRecoveredWithoutDetails
+      dataRecoveredWithoutDetails,
     });
   }
 
@@ -74,8 +74,8 @@ class CountryRecovered extends React.Component {
         <div>
           <CountryChart
             dataWithoutDetails={this.state.dataRecoveredWithoutDetails}
-            typeOfChart = {"line"}
-            totalOrDaily = {"Total"}
+            typeOfChart={"line"}
+            totalOrDaily={"Total"}
           />
         </div>
       );

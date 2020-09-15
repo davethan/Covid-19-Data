@@ -9,17 +9,17 @@ import Explanations from "../Explanations/Explanations";
 class LoadEveryChart extends React.Component {
   render() {
     const { classes } = this.props;
-    if (this.props === null){
-        return <Loading/>
+    if (this.props === null) {
+      return <Loading />;
     } else {
-        return (
-            <div className={classes.LoadEveryChart}>
-                <CountryGeneralConfirmedDeaths props={this.props}/>
-                <CountryRecovered props={this.props}/>
-                <Explanations />
-            </div>
-        );
-      }
+      return (
+        <div className={classes.LoadEveryChart}>
+          <CountryGeneralConfirmedDeaths props={this.props} />
+          <CountryRecovered props={this.props} />
+          <Explanations />
+        </div>
+      );
+    }
   }
 }
 

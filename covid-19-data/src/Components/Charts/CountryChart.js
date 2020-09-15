@@ -19,12 +19,11 @@ function constructDataPoints(state) {
 }
 
 class CountryChart extends Component {
-
   render() {
     const { classes } = this.props;
     let dataPoints = null;
     dataPoints = constructDataPoints(this.props);
-    const type = this.props.typeOfChart
+    const type = this.props.typeOfChart;
 
     const options = {
       animationEnabled: true,
@@ -45,7 +44,7 @@ class CountryChart extends Component {
           xValueFormatString: "",
           type: type,
           dataPoints: dataPoints,
-          color: "#295191"
+          color: "#295191",
         },
       ],
     };
@@ -69,7 +68,8 @@ class CountryChart extends Component {
     return (
       <Paper elevation={3} className={classes.chart}>
         <Typography variant="h5" className={classes.title}>
-          {this.props.totalOrDaily} {status} in {this.props.dataWithoutDetails[0].Country}
+          {this.props.totalOrDaily} {status} in{" "}
+          {this.props.dataWithoutDetails[0].Country}
         </Typography>
         <CanvasJSChart options={options} onRef={(ref) => (this.chart = ref)} />
       </Paper>

@@ -74,7 +74,7 @@ class CountryGeneralConfirmedDeaths extends React.Component {
 
     this.setState({
       dataConfirmedWithoutDetails,
-      dataDeathsWithoutDetails
+      dataDeathsWithoutDetails,
     });
   }
 
@@ -105,16 +105,18 @@ class CountryGeneralConfirmedDeaths extends React.Component {
           />
           <CountryChart
             dataWithoutDetails={this.state.dataConfirmedWithoutDetails}
-            typeOfChart = {"line"}
-            totalOrDaily = {"Total"}
+            typeOfChart={"line"}
+            totalOrDaily={"Total"}
           />
-          <DailyData dataWithoutDetails={this.state.dataConfirmedWithoutDetails}/>
+          <DailyData
+            dataWithoutDetails={this.state.dataConfirmedWithoutDetails}
+          />
           <CountryChart
             dataWithoutDetails={this.state.dataDeathsWithoutDetails}
-            typeOfChart = {"line"}
-            totalOrDaily = {"Total"}
+            typeOfChart={"line"}
+            totalOrDaily={"Total"}
           />
-          <DailyData dataWithoutDetails={this.state.dataDeathsWithoutDetails}/>
+          <DailyData dataWithoutDetails={this.state.dataDeathsWithoutDetails} />
         </div>
       );
     }

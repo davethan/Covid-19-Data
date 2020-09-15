@@ -37,19 +37,68 @@ export default function CountriesSummary(props) {
                 if (index === 1) {
                   return <React.Fragment key={index}></React.Fragment>;
                 } else if (index === 2) {
-                  return <TableCell key={index} onClick={() => props.sortTable(index)} >New Cases</TableCell>;
+                  return (
+                    <TableCell
+                      key={index}
+                      onClick={() => props.sortTable(index)}
+                    >
+                      New Cases
+                    </TableCell>
+                  );
                 } else if (index === 3) {
-                  return <TableCell key={index} onClick={() => props.sortTable(index)} >Total Cases</TableCell>;
+                  return (
+                    <TableCell
+                      key={index}
+                      onClick={() => props.sortTable(index)}
+                    >
+                      Total Cases
+                    </TableCell>
+                  );
                 } else if (index === 4) {
-                  return <TableCell key={index} onClick={() => props.sortTable(index)} >New Deaths</TableCell>;
+                  return (
+                    <TableCell
+                      key={index}
+                      onClick={() => props.sortTable(index)}
+                    >
+                      New Deaths
+                    </TableCell>
+                  );
                 } else if (index === 5) {
-                  return <TableCell key={index} onClick={() => props.sortTable(index)} >Total Deaths</TableCell>;
+                  return (
+                    <TableCell
+                      key={index}
+                      onClick={() => props.sortTable(index)}
+                    >
+                      Total Deaths
+                    </TableCell>
+                  );
                 } else if (index === 6) {
-                  return <TableCell key={index} onClick={() => props.sortTable(index)} >New Recovered</TableCell>;
+                  return (
+                    <TableCell
+                      key={index}
+                      onClick={() => props.sortTable(index)}
+                    >
+                      New Recovered
+                    </TableCell>
+                  );
                 } else if (index === 7) {
-                  return <TableCell key={index} onClick={() => props.sortTable(index)} >Total Recovered</TableCell>;
+                  return (
+                    <TableCell
+                      key={index}
+                      onClick={() => props.sortTable(index)}
+                    >
+                      Total Recovered
+                    </TableCell>
+                  );
                 } else {
-                  return <TableCell key={index} onClick={() => props.sortTable(index)} >{key}</TableCell>;
+                  return (
+                    <TableCell
+                      key={index}
+                      onClick={() => props.sortTable(index)}
+                    >
+                      {key}
+                    </TableCell>
+                  );
                 }
               })}
             </TableRow>
