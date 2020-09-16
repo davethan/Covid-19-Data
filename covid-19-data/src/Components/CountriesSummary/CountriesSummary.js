@@ -25,11 +25,11 @@ export default function CountriesSummary(props) {
   };
 
   function changeBackground(e) {
-    e.target.style.background = "rgba(250, 250, 250, 0.1)";
+    e.target.style.background = "#e8e8e8";
   }
 
   function changeBackgroundBack(e) {
-    e.target.style.background = "rgba(250, 250, 250, 1)";
+    e.target.style.background = "#fafafa";
   }
 
   return (
