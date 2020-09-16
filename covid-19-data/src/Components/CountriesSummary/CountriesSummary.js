@@ -9,6 +9,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Link } from "react-router-dom";
+import { mdiArrowUpDown } from "@mdi/js";
+import Icon from "@mdi/react";
+import IconButton from "@material-ui/core/IconButton";
 
 export default function CountriesSummary(props) {
   const classes = useStyles();
@@ -42,7 +45,15 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      New Cases
+                      <div className={classes.titleOfTablecells}>
+                        <IconButton className={classes.iconButton}>
+                          <Icon
+                            className={classes.icon}
+                            path={mdiArrowUpDown}
+                          />
+                        </IconButton>
+                        New Cases
+                      </div>
                     </TableCell>
                   );
                 } else if (index === 3) {
@@ -51,7 +62,15 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      Total Cases
+                      <div className={classes.titleOfTablecells}>
+                        <IconButton className={classes.iconButton}>
+                          <Icon
+                            className={classes.icon}
+                            path={mdiArrowUpDown}
+                          />
+                        </IconButton>
+                        Total Cases
+                      </div>
                     </TableCell>
                   );
                 } else if (index === 4) {
@@ -60,7 +79,15 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      New Deaths
+                      <div className={classes.titleOfTablecells}>
+                        <IconButton className={classes.iconButton}>
+                          <Icon
+                            className={classes.icon}
+                            path={mdiArrowUpDown}
+                          />
+                        </IconButton>
+                        New Deaths
+                      </div>
                     </TableCell>
                   );
                 } else if (index === 5) {
@@ -69,7 +96,15 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      Total Deaths
+                      <div className={classes.titleOfTablecells}>
+                        <IconButton className={classes.iconButton}>
+                          <Icon
+                            className={classes.icon}
+                            path={mdiArrowUpDown}
+                          />
+                        </IconButton>
+                        Total Deaths
+                      </div>
                     </TableCell>
                   );
                 } else if (index === 6) {
@@ -78,7 +113,15 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      New Recovered
+                      <div className={classes.titleOfTablecells}>
+                        <IconButton className={classes.iconButton}>
+                          <Icon
+                            className={classes.icon}
+                            path={mdiArrowUpDown}
+                          />
+                        </IconButton>
+                        New Recovered
+                      </div>
                     </TableCell>
                   );
                 } else if (index === 7) {
@@ -87,7 +130,15 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      Total Recovered
+                      <div className={classes.titleOfTablecells}>
+                        <IconButton className={classes.iconButton}>
+                          <Icon
+                            className={classes.icon}
+                            path={mdiArrowUpDown}
+                          />
+                        </IconButton>
+                        Total Recovered
+                      </div>
                     </TableCell>
                   );
                 } else {
@@ -96,7 +147,15 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      {key}
+                      <div className={classes.titleOfTablecells}>
+                        <IconButton className={classes.iconButton}>
+                          <Icon
+                            className={classes.icon}
+                            path={mdiArrowUpDown}
+                          />
+                        </IconButton>
+                        {key}
+                      </div>
                     </TableCell>
                   );
                 }

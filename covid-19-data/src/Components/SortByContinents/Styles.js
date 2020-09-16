@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   },
   individual: {
     borderRadius: "5px 5px 0px 0px",
-    backgroundColor: "#ffffe0"
+    backgroundColor: "#ffffe9"
   },
 });
 export default useStyles;

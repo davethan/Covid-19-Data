@@ -53,22 +53,26 @@ class Summary extends React.Component {
     let url = "https://api.covid19api.com/summary";
     const response = await fetch(url);
     const data = await response.json();
-    for (let i = 0; i < data.Countries.length; i++) {
-      delete data.Countries[i]["CountryCode"];
-      delete data.Countries[i]["Date"];
-      delete data.Countries[i]["Premium"];
+    if (data.Message === "Caching in progress") {
+      this.setState({ data });
+    } else {
+      for (let i = 0; i < data.Countries.length; i++) {
+        delete data.Countries[i]["CountryCode"];
+        delete data.Countries[i]["Date"];
+        delete data.Countries[i]["Premium"];
+      }
+      let asc = {
+        NewConfirmed: true,
+        TotalConfirmed: true,
+        NewDeaths: true,
+        TotalDeaths: true,
+        NewRecovered: true,
+        TotalRecovered: true,
+        Country: true,
+      };
+      let dataToShow = data.Countries;
+      this.setState({ data, asc, dataToShow });
     }
-    let asc = {
-      NewConfirmed: true,
-      TotalConfirmed: true,
-      NewDeaths: true,
-      TotalDeaths: true,
-      NewRecovered: true,
-      TotalRecovered: true,
-      Country: true,
-    };
-    let dataToShow = data.Countries;
-    this.setState({ data, asc, dataToShow });
   }
 
   sortTable(index) {
@@ -371,47 +375,61 @@ class Summary extends React.Component {
     const state = this.state;
     const { classes } = this.props;
     let time;
-    if (state) {
+    if (state && state.data.Date) {
       time = timeSinceLastUpdate(state.data.Date);
     }
-    return state === null ? (
-      <div>
-        <Header />
-        <div className={classes.summaryBody}>
-          <Loading />
-        </div>
-      </div>
-    ) : (
-      <div>
-        <Header />
-        <div className={classes.summaryBody}>
-          <Route
-            exact
-            path="/Covid-19-Data"
-            render={() => (
-              <div>
-                <GeneralGlobally Globals={state.data.Global} />
-                <SortByContinents showByContinents={this.showByContinents} />
-                <CountriesSummary
-                  sortTable={this.sortTable}
-                  CountriesSummary={state.dataToShow}
-                />
-              </div>
-            )}
-          />
-
-          <Route
-            exact
-            path="/Covid-19-Data/country:countryName"
-            render={(params) => <LoadEveryChart props={params} />}
-          />
-
-          <div className={classes.lastUpdate}>
-            <Typography>Last update {time} </Typography>
+    if (state === null) {
+      return (
+        <div>
+          <Header />
+          <div className={classes.summaryBody}>
+            <Loading />
           </div>
         </div>
-      </div>
-    );
+      );
+    } else if (state.data.Message === "Caching in progress") {
+      return (
+        <div>
+          <Header />
+          <div className={classes.summaryBody}>
+            <Typography className={classes.lastUpdate}>
+              We are updating our servers, please come again later...
+            </Typography>
+          </div>
+        </div>
+      );
+    } else
+      return (
+        <div>
+          <Header />
+          <div className={classes.summaryBody}>
+            <Route
+              exact
+              path="/Covid-19-Data"
+              render={() => (
+                <div>
+                  <GeneralGlobally Globals={state.data.Global} />
+                  <SortByContinents showByContinents={this.showByContinents} />
+                  <CountriesSummary
+                    sortTable={this.sortTable}
+                    CountriesSummary={state.dataToShow}
+                  />
+                </div>
+              )}
+            />
+
+            <Route
+              exact
+              path="/Covid-19-Data/country:countryName"
+              render={(params) => <LoadEveryChart props={params} />}
+            />
+
+            <div className={classes.lastUpdate}>
+              <Typography>Last update {time} </Typography>
+            </div>
+          </div>
+        </div>
+      );
   }
 }
 
