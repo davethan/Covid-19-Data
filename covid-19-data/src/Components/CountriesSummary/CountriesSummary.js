@@ -9,9 +9,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Link } from "react-router-dom";
-import { mdiArrowUpDown } from "@mdi/js";
-import Icon from "@mdi/react";
-import IconButton from "@material-ui/core/IconButton";
 
 export default function CountriesSummary(props) {
   const classes = useStyles();
@@ -26,6 +23,14 @@ export default function CountriesSummary(props) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  function changeBackground(e) {
+    e.target.style.background = "rgba(250, 250, 250, 0.1)";
+  }
+
+  function changeBackgroundBack(e) {
+    e.target.style.background = "rgba(250, 250, 250, 1)";
+  }
 
   return (
     <Paper elevation={1} className={classes.root}>
@@ -42,120 +47,78 @@ export default function CountriesSummary(props) {
                 } else if (index === 2) {
                   return (
                     <TableCell
+                      onMouseOver={changeBackground}
+                      onMouseLeave={changeBackgroundBack}
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      <div className={classes.titleOfTablecells}>
-                        <IconButton className={classes.iconButton}>
-                          <Icon
-                            className={classes.icon}
-                            path={mdiArrowUpDown}
-                          />
-                        </IconButton>
-                        New Cases
-                      </div>
+                      New Cases
                     </TableCell>
                   );
                 } else if (index === 3) {
                   return (
                     <TableCell
+                      onMouseOver={changeBackground}
+                      onMouseLeave={changeBackgroundBack}
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      <div className={classes.titleOfTablecells}>
-                        <IconButton className={classes.iconButton}>
-                          <Icon
-                            className={classes.icon}
-                            path={mdiArrowUpDown}
-                          />
-                        </IconButton>
-                        Total Cases
-                      </div>
+                      Total Cases
                     </TableCell>
                   );
                 } else if (index === 4) {
                   return (
                     <TableCell
+                      onMouseOver={changeBackground}
+                      onMouseLeave={changeBackgroundBack}
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      <div className={classes.titleOfTablecells}>
-                        <IconButton className={classes.iconButton}>
-                          <Icon
-                            className={classes.icon}
-                            path={mdiArrowUpDown}
-                          />
-                        </IconButton>
-                        New Deaths
-                      </div>
+                      New Deaths
                     </TableCell>
                   );
                 } else if (index === 5) {
                   return (
                     <TableCell
+                      onMouseOver={changeBackground}
+                      onMouseLeave={changeBackgroundBack}
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      <div className={classes.titleOfTablecells}>
-                        <IconButton className={classes.iconButton}>
-                          <Icon
-                            className={classes.icon}
-                            path={mdiArrowUpDown}
-                          />
-                        </IconButton>
-                        Total Deaths
-                      </div>
+                      Total Deaths
                     </TableCell>
                   );
                 } else if (index === 6) {
                   return (
                     <TableCell
+                      onMouseOver={changeBackground}
+                      onMouseLeave={changeBackgroundBack}
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      <div className={classes.titleOfTablecells}>
-                        <IconButton className={classes.iconButton}>
-                          <Icon
-                            className={classes.icon}
-                            path={mdiArrowUpDown}
-                          />
-                        </IconButton>
-                        New Recovered
-                      </div>
+                      New Recovered
                     </TableCell>
                   );
                 } else if (index === 7) {
                   return (
                     <TableCell
+                      onMouseOver={changeBackground}
+                      onMouseLeave={changeBackgroundBack}
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      <div className={classes.titleOfTablecells}>
-                        <IconButton className={classes.iconButton}>
-                          <Icon
-                            className={classes.icon}
-                            path={mdiArrowUpDown}
-                          />
-                        </IconButton>
-                        Total Recovered
-                      </div>
+                      Total Recovered
                     </TableCell>
                   );
                 } else {
                   return (
                     <TableCell
+                      onMouseOver={changeBackground}
+                      onMouseLeave={changeBackgroundBack}
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      <div className={classes.titleOfTablecells}>
-                        <IconButton className={classes.iconButton}>
-                          <Icon
-                            className={classes.icon}
-                            path={mdiArrowUpDown}
-                          />
-                        </IconButton>
-                        {key}
-                      </div>
+                      {key}
                     </TableCell>
                   );
                 }

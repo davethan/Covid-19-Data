@@ -11,7 +11,10 @@ const useStyles = makeStyles({
   },
   individual: {
     borderRadius: "5px 5px 0px 0px",
-    backgroundColor: "#ffffe9"
+    backgroundColor: "white",
+    '&:hover': {
+      backgroundColor: "rgba(240, 240, 240, 1)"
+  }
   },
 });
 export default useStyles;
