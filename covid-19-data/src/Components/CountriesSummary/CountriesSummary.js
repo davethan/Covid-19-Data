@@ -9,6 +9,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Link } from "react-router-dom";
+import { mdiArrowUpDown } from "@mdi/js";
+import Icon from "@mdi/react";
 
 export default function CountriesSummary(props) {
   const classes = useStyles();
@@ -25,11 +27,11 @@ export default function CountriesSummary(props) {
   };
 
   function changeBackground(e) {
-    e.target.style.background = "#e8e8e8";
+    e.currentTarget.style.background = "#e8e8e8";
   }
 
   function changeBackgroundBack(e) {
-    e.target.style.background = "#fafafa";
+    e.currentTarget.style.background = "#fafafa";
   }
 
   return (
@@ -52,7 +54,10 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      New Cases
+                      <div className={classes.tableCell}>
+                        New Cases
+                        <Icon className={classes.icon} path={mdiArrowUpDown} />
+                      </div>
                     </TableCell>
                   );
                 } else if (index === 3) {
@@ -63,7 +68,10 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      Total Cases
+                      <div className={classes.tableCell}>
+                        Total Cases
+                        <Icon className={classes.icon} path={mdiArrowUpDown} />
+                      </div>
                     </TableCell>
                   );
                 } else if (index === 4) {
@@ -74,7 +82,10 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      New Deaths
+                      <div className={classes.tableCell}>
+                        New Deaths
+                        <Icon className={classes.icon} path={mdiArrowUpDown} />
+                      </div>
                     </TableCell>
                   );
                 } else if (index === 5) {
@@ -85,7 +96,10 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      Total Deaths
+                      <div className={classes.tableCell}>
+                        Total Deaths
+                        <Icon className={classes.icon} path={mdiArrowUpDown} />
+                      </div>
                     </TableCell>
                   );
                 } else if (index === 6) {
@@ -96,7 +110,10 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      New Recovered
+                      <div className={classes.tableCell}>
+                        New Recovered
+                        <Icon className={classes.icon} path={mdiArrowUpDown} />
+                      </div>
                     </TableCell>
                   );
                 } else if (index === 7) {
@@ -107,7 +124,10 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      Total Recovered
+                      <div className={classes.tableCell}>
+                        Total Recovered
+                        <Icon className={classes.icon} path={mdiArrowUpDown} />
+                      </div>
                     </TableCell>
                   );
                 } else {
@@ -118,7 +138,10 @@ export default function CountriesSummary(props) {
                       key={index}
                       onClick={() => props.sortTable(index)}
                     >
-                      {key}
+                      <div className={classes.tableCell}>
+                        {key}
+                        <Icon className={classes.icon} path={mdiArrowUpDown} />
+                      </div>
                     </TableCell>
                   );
                 }

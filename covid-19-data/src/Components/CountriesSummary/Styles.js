@@ -11,5 +11,16 @@ const useStyles = makeStyles({
     textDecoration: "none",
     color: "black",
   },
+  tableCell: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "start",
+    alignItems: "center",
+  },
+  icon: {
+    maxHeight: "0.7rem",
+    minWidth: "1rem",
+    color: "#828282",
+  },
 });
 export default useStyles;
