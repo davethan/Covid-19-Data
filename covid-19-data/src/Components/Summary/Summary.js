@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./Styles.js";
 import { withStyles } from "@material-ui/styles";
-import Loading from "../Loading";
 import GeneralGlobally from "../GeneralGlobally";
 import CountriesSummary from "../CountriesSummary/CountriesSummary";
 import Typography from "@material-ui/core/Typography";
@@ -9,6 +8,7 @@ import { Route } from "react-router-dom";
 import LoadEveryChart from "../LoadEveryChart/LoadEveryChart";
 import Header from "../Header/Header";
 import SortByContinents from "../SortByContinents/SortByContinents";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 function timeSinceLastUpdate(dateFromState) {
   let date = dateFromState + "";
@@ -383,17 +383,58 @@ class Summary extends React.Component {
         <div>
           <Header />
           <div className={classes.summaryBody}>
-            <Loading />
+            <Skeleton
+              className={classes.skeletonOfGeneral}
+              animation="wave"
+              variant="rect"
+            />
+            <Skeleton
+              className={classes.skeletonOfGeneralBig}
+              animation="wave"
+              variant="rect"
+            />
+            <Skeleton
+              className={classes.skeletonOfGeneral}
+              animation="wave"
+              variant="rect"
+            />
+            <Skeleton
+              className={classes.skeletonOfGeneralBig}
+              animation="wave"
+              variant="rect"
+            />
+            <Skeleton
+              className={classes.skeletonOfGeneral}
+              animation="wave"
+              variant="rect"
+            />
+            <Skeleton
+              className={classes.skeletonOfGeneralBig}
+              animation="wave"
+              variant="rect"
+            />
+            <Skeleton className={classes.skeletonOfTable} animation="wave" />
+            <Skeleton className={classes.skeletonOfTable} animation="wave" />
+            <Skeleton className={classes.skeletonOfTable} animation="wave" />
+            <Skeleton className={classes.skeletonOfTable} animation="wave" />
+            <Skeleton className={classes.skeletonOfTable} animation="wave" />
+            <Skeleton className={classes.skeletonOfTable} animation="wave" />
+            <Skeleton className={classes.skeletonOfTable} animation="wave" />
+            <Skeleton className={classes.skeletonOfTable} animation="wave" />
+            <Skeleton className={classes.skeletonOfTable} animation="wave" />
+            <Skeleton className={classes.skeletonOfTable} animation="wave" />
           </div>
         </div>
       );
-    } else if (state.data.Message === "Caching in progress") {
+    } else if (state.data.Message !== "") {
       return (
         <div>
           <Header />
           <div className={classes.summaryBody}>
             <Typography className={classes.lastUpdate}>
-              We are updating our servers, please come again later...
+              {state.data.Message}.<br />
+              We are updating our servers with the latest Covid-19 data, please
+              come again later...
             </Typography>
           </div>
         </div>

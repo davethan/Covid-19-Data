@@ -3,7 +3,7 @@ import styles from "./CountryGeneralConfirmedDeaths/Styles";
 import { withStyles } from "@material-ui/styles";
 import CountryChart from "./Charts/CountryChart";
 import Typography from "@material-ui/core/Typography";
-import Loading from "./Loading";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 function getSlug(slug) {
   slug = slug.slice(23, slug.length);
@@ -62,7 +62,14 @@ class CountryRecovered extends React.Component {
   render() {
     const { classes } = this.props;
     if (this.state === null) {
-      return <Loading />;
+      return (
+        <Skeleton
+          animation="wave"
+          variant="rect"
+          height={400}
+          style={{ marginTop: "0.7rem" }}
+        />
+      );
     } else if (this.state.dataRecoveredWithoutDetails.length <= 0) {
       return (
         <Typography className={classes.noData}>

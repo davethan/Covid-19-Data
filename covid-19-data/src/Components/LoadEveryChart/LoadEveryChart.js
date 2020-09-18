@@ -3,14 +3,13 @@ import styles from "./Styles.js";
 import { withStyles } from "@material-ui/styles";
 import CountryGeneralConfirmedDeaths from "../CountryGeneralConfirmedDeaths/CountryGeneralConfirmedDeaths";
 import CountryRecovered from "../CountryRecovered";
-import Loading from "../Loading";
 import Explanations from "../Explanations/Explanations";
 
 class LoadEveryChart extends React.Component {
   render() {
     const { classes } = this.props;
     if (this.props === null) {
-      return <Loading />;
+      return <div></div>;
     } else {
       return (
         <div className={classes.LoadEveryChart}>

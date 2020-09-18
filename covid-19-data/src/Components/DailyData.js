@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./CountryGeneralConfirmedDeaths/Styles";
 import { withStyles } from "@material-ui/styles";
 import CountryChart from "./Charts/CountryChart";
-import Loading from "./Loading";
 
 function makeDailyAndFixNegativeCases(data) {
   let i;
@@ -39,7 +38,7 @@ class DailyData extends React.Component {
 
   render() {
     if (this.state === null) {
-      return <Loading />;
+      return <div></div>;
     } else {
       return (
         <CountryChart

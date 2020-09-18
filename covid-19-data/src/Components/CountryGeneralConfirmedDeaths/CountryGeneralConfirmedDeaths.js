@@ -3,9 +3,9 @@ import styles from "./Styles.js";
 import { withStyles } from "@material-ui/styles";
 import CountryChart from "../Charts/CountryChart";
 import Typography from "@material-ui/core/Typography";
-import Loading from "../Loading";
 import GeneralCountrywide from "../GeneralCountrywide/GeneralCountrywide";
 import DailyData from "../DailyData.js";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 function getSlug(slug) {
   slug = slug.slice(23, slug.length);
@@ -81,7 +81,96 @@ class CountryGeneralConfirmedDeaths extends React.Component {
   render() {
     const { classes } = this.props;
     if (this.state === null) {
-      return <Loading />;
+      return (
+        <div>
+          <Skeleton
+            className={classes.skeletonOfGeneral}
+            animation="wave"
+            variant="rect"
+          />
+          <Skeleton
+            className={classes.skeletonOfGeneralBig}
+            animation="wave"
+            variant="rect"
+          />
+          <div className={classes.flexOfSkeleton}>
+            <div>
+              <Skeleton
+                className={classes.skeletonOfGeneral}
+                animation="wave"
+                variant="rect"
+              />
+              <Skeleton
+                className={classes.skeletonOfGeneralBig}
+                animation="wave"
+                variant="rect"
+              />
+            </div>
+            <div>
+              <Skeleton
+                className={classes.skeletonOfGeneral}
+                animation="wave"
+                variant="rect"
+              />
+              <Skeleton
+                className={classes.skeletonOfGeneralBig}
+                animation="wave"
+                variant="rect"
+              />
+            </div>
+          </div>
+          <div className={classes.flexOfSkeleton}>
+            <div>
+              <Skeleton
+                className={classes.skeletonOfGeneral}
+                animation="wave"
+                variant="rect"
+              />
+              <Skeleton
+                className={classes.skeletonOfGeneralBig}
+                animation="wave"
+                variant="rect"
+              />
+            </div>
+            <div>
+              <Skeleton
+                className={classes.skeletonOfGeneral}
+                animation="wave"
+                variant="rect"
+              />
+              <Skeleton
+                className={classes.skeletonOfGeneralBig}
+                animation="wave"
+                variant="rect"
+              />
+            </div>
+          </div>
+          <Skeleton
+            animation="wave"
+            variant="rect"
+            height={400}
+            style={{ marginTop: "0.7rem" }}
+          />
+          <Skeleton
+            animation="wave"
+            variant="rect"
+            height={400}
+            style={{ marginTop: "0.7rem" }}
+          />
+          <Skeleton
+            animation="wave"
+            variant="rect"
+            height={400}
+            style={{ marginTop: "0.7rem" }}
+          />
+          <Skeleton
+            animation="wave"
+            variant="rect"
+            height={400}
+            style={{ marginTop: "0.7rem" }}
+          />
+        </div>
+      );
     } else if (this.state.dataConfirmedWithoutDetails.length <= 0) {
       return (
         <Typography className={classes.noData}>
