@@ -9,6 +9,7 @@ import LoadEveryChart from "../LoadEveryChart/LoadEveryChart";
 import Header from "../Header/Header";
 import SortByContinents from "../SortByContinents/SortByContinents";
 import Skeleton from "@material-ui/lab/Skeleton";
+import Map from "../Map/Map";
 
 function timeSinceLastUpdate(dateFromState) {
   let date = dateFromState + "";
@@ -57,7 +58,6 @@ class Summary extends React.Component {
       this.setState({ data });
     } else {
       for (let i = 0; i < data.Countries.length; i++) {
-        delete data.Countries[i]["CountryCode"];
         delete data.Countries[i]["Date"];
         delete data.Countries[i]["Premium"];
       }
@@ -70,14 +70,16 @@ class Summary extends React.Component {
         TotalRecovered: true,
         Country: true,
       };
-      let dataToShow = data.Countries;
+      let dataToShow = JSON.parse(JSON.stringify(data.Countries));
+      for (let i = 0; i < dataToShow.length; i++) {
+        delete dataToShow[i]["CountryCode"];
+      }
       this.setState({ data, asc, dataToShow });
     }
   }
 
   sortTable(index) {
     let dataToShowToTable = this.state.dataToShow;
-    // console.log(dataToShowToTable) //This is bizzare...
     let sortBy;
     switch (index) {
       case 2:
@@ -110,7 +112,6 @@ class Summary extends React.Component {
     }
 
     dataToShowToTable.sort(compareValues(sortBy, howToSort));
-    //!!!THIS DOES NOT WORK PROPERLY!!!
     this.setState((prevState) => ({
       asc: {
         ...prevState.asc,
@@ -125,6 +126,7 @@ class Summary extends React.Component {
 
   showByContinents(index) {
     let countriesToShow;
+    let allCountries = JSON.parse(JSON.stringify(this.state.data.Countries));
     switch (index) {
       case "Oceania":
         countriesToShow = [
@@ -339,7 +341,7 @@ class Summary extends React.Component {
         ];
         break;
       default:
-        countriesToShow = this.state.data.Countries;
+        countriesToShow = allCountries;
         break;
     }
 
@@ -347,19 +349,22 @@ class Summary extends React.Component {
     if (index !== "All") {
       let j, i;
       let k = 0;
-      for (i = 0; i < this.state.data.Countries.length; i++) {
+      for (i = 0; i < allCountries.length; i++) {
         for (j = 0; j < countriesToShow.length; j++) {
-          if (this.state.data.Countries[i].Slug === countriesToShow[j]) {
-            dataOfCountriesToShow[k] = this.state.data.Countries[i];
+          if (allCountries[i].Slug === countriesToShow[j]) {
+            dataOfCountriesToShow[k] = allCountries[i];
+            delete dataOfCountriesToShow[k]["CountryCode"];
             k++;
             break;
           }
         }
       }
     } else {
+      for (let i = 0; i < countriesToShow.length; i++) {
+        delete countriesToShow[i]["CountryCode"];
+      }
       dataOfCountriesToShow = countriesToShow;
     }
-
     this.setState((prevState) => ({
       asc: {
         ...prevState.asc,
@@ -423,6 +428,12 @@ class Summary extends React.Component {
             <Skeleton className={classes.skeletonOfTable} animation="wave" />
             <Skeleton className={classes.skeletonOfTable} animation="wave" />
             <Skeleton className={classes.skeletonOfTable} animation="wave" />
+            <Skeleton
+              animation="wave"
+              variant="rect"
+              height={400}
+              style={{ marginTop: "0.7rem" }}
+            />
           </div>
         </div>
       );
@@ -455,6 +466,7 @@ class Summary extends React.Component {
                     sortTable={this.sortTable}
                     CountriesSummary={state.dataToShow}
                   />
+                  <Map data={this.state.data.Countries} />
                 </div>
               )}
             />

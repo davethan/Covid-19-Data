@@ -145,30 +145,6 @@ class CountryGeneralConfirmedDeaths extends React.Component {
               />
             </div>
           </div>
-          <Skeleton
-            animation="wave"
-            variant="rect"
-            height={400}
-            style={{ marginTop: "0.7rem" }}
-          />
-          <Skeleton
-            animation="wave"
-            variant="rect"
-            height={400}
-            style={{ marginTop: "0.7rem" }}
-          />
-          <Skeleton
-            animation="wave"
-            variant="rect"
-            height={400}
-            style={{ marginTop: "0.7rem" }}
-          />
-          <Skeleton
-            animation="wave"
-            variant="rect"
-            height={400}
-            style={{ marginTop: "0.7rem" }}
-          />
         </div>
       );
     } else if (this.state.dataConfirmedWithoutDetails.length <= 0) {
