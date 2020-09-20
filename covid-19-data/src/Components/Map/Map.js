@@ -30,13 +30,24 @@ function createDeaths(data) {
 
 function useWindowSize() {
   let [size, setSize] = useState("md");
+  const addPixels = 10;
   useLayoutEffect(() => {
     function updateSize() {
-      if (window.innerWidth < 366) {
+      if (window.innerWidth < 366 + addPixels) {
         size = "sm";
-      } else if (window.innerWidth >= 366 && window.innerWidth <= 480) {
+      } else if (
+        window.innerWidth >= 366 + addPixels &&
+        window.innerWidth < 480 + addPixels
+      ) {
         size = "md";
-      } else if (window.innerWidth > 480) size = "lg";
+      } else if (
+        window.innerWidth >= 480 + addPixels &&
+        window.innerWidth < 640 + 5 * addPixels
+      )
+        size = "lg";
+      else {
+        size = "xl";
+      }
       setSize(size);
     }
     window.addEventListener("resize", updateSize);
@@ -77,7 +88,7 @@ export default function Map(props) {
       [event.target.name]: event.target.checked,
     });
   };
-  
+
   return state.dataToShow === null ||
     state.dataToShow === undefined ||
     sizeOfSVG === null ||
@@ -91,7 +102,7 @@ export default function Map(props) {
     />
   ) : (
     <Paper elevation={1} className={classes.mapAndSwitch}>
-      <Typography className={classes.title}>{state.title}</Typography>
+      <Typography variant="h6" className={classes.title}>{state.title}</Typography>
       <WorldMap
         color={state.color}
         title=""
@@ -109,7 +120,10 @@ export default function Map(props) {
     </Paper>
   );
 }
-
-//sm ht: 180 wd:240
-//md ht: 252 wd:366
-//lg ht: 360 wd:480
+//# sourceMappingURL=react-svg-worldmap.esm.js.map
+// var CSizes = {
+//   "sm": 240,
+//   "md": 336,
+//   "lg": 480,
+//   "xl": 640
+// };

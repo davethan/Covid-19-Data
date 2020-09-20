@@ -12,7 +12,7 @@ const styles = () => ({
     maxWidth: 360,
   },
   skeletonOfGeneralBig: {
-    minWidth: "10rem",
+    minWidth: "12rem",
     width: "90%",
     height: "3.5rem",
     margin: "0rem auto 0.3rem",
