@@ -22,8 +22,8 @@ function makeDailyAndFixNegativeCases(data) {
 }
 
 class DailyData extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = null;
   }
 

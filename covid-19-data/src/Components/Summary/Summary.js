@@ -42,8 +42,8 @@ function compareValues(key, order = "asc") {
 }
 
 class Summary extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = null;
     this.componentDidMount = this.componentDidMount.bind(this);
     this.sortTable = this.sortTable.bind(this);

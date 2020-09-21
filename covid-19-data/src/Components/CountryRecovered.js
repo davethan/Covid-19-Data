@@ -40,8 +40,8 @@ function dataEdit(data) {
 }
 
 class CountryRecovered extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = null;
   }
 
