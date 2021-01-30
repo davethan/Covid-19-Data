@@ -59,6 +59,7 @@ class Summary extends React.Component {
     } else {
       for (let i = 0; i < data.Countries.length; i++) {
         delete data.Countries[i]["Date"];
+        delete data.Countries[i]["ID"];
         delete data.Countries[i]["Premium"];
       }
       let asc = {
